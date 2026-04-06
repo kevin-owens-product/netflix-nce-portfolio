@@ -1,0 +1,44 @@
+name: Uptime Monitor
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  uptime:
+    name: Check site uptime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping production URL
+        id: ping
+        run: |
+          URL="${{ vars.PRODUCTION_URL }}"
+          if [ -z "$URL" ]; then
+            echo "PRODUCTION_URL not set — skipping"
+            exit 0
+          fi
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$URL" || echo "000")
+          LATENCY=$(curl -s -o /dev/null -w "%{time_total}" --max-time 15 "$URL" || echo "0")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "latency=$LATENCY" >> $GITHUB_OUTPUT
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "HTTP Status: $STATUS | Latency: ${LATENCY}s"
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::Site returned HTTP $STATUS"
+            exit 1
+          fi
+
+      - name: Report success
+        if: success()
+        run: |
+          echo "✅ Site is UP — HTTP ${{ steps.ping.outputs.status }} in ${{ steps.ping.outputs.latency }}s"
+          echo "URL: ${{ steps.ping.outputs.url }}"
+
+      - name: Alert on failure
+        if: failure()
+        run: |
+          echo "🚨 SITE DOWN — HTTP ${{ steps.ping.outputs.status }}"
+          echo "URL: ${{ steps.ping.outputs.url }}"
+          # TODO: Add Slack/PagerDuty webhook notification here
+          # curl -X POST "$SLACK_WEBHOOK" -d '{"text":"🚨 Netflix NCE Portfolio is DOWN!"}'
