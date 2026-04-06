@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Line, AreaChart, Area, RadarChart, Radar, PolarGrid,
   PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, XAxis, YAxis,
@@ -43,6 +44,14 @@ interface Product {
 type TabId = 'overview' | 'metcalfe' | 'synergy' | 'flywheel' | 'adoption'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
+
+const PRODUCT_SLUGS: Record<number, string> = {
+  0: 'watch-together',
+  1: 'netflix-live',
+  2: 'creator-studio',
+  3: 'game-night',
+  4: 'fan-marketplace',
+}
 
 const PRODUCTS: Product[] = [
   {
@@ -253,10 +262,14 @@ function OverviewTab({ products, onSelectProduct }: {
                 <div className="text-white font-bold">{(p.engagementRate * 100).toFixed(0)}%</div>
               </div>
             </div>
-            <div className="mt-3 flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all"
-              style={{ color: p.color }}>
-              Analyze <ChevronRight size={14} />
-            </div>
+            <Link
+              to={`/concepts/${PRODUCT_SLUGS[p.id]}`}
+              onClick={e => e.stopPropagation()}
+              className="mt-3 flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all"
+              style={{ color: p.color }}
+            >
+              View Concept <ChevronRight size={14} />
+            </Link>
           </div>
         ))}
 
@@ -475,10 +488,10 @@ function MetcalfeTab({ products }: { products: Product[] }) {
             <p className="text-xs text-gray-500 leading-relaxed">
               At <span className="text-white font-bold">{users}M users</span>, {product.name} creates{' '}
               <span style={{ color: product.color }} className="font-bold">
-                {(connections / 1_000_000_000).toFixed(2)}B
+                {(networkConnections(users * 1000) / 1_000_000_000).toFixed(1)}B
               </span>{' '}
               unique connections — a <span className="text-white font-bold">
-                {((connections / users) / 1_000_000).toFixed(1)}M×
+                {(networkConnections(users * 1000) / (users * 1000) / 1000).toFixed(1)}M×
               </span> network leverage multiplier.
             </p>
           </div>
@@ -1035,11 +1048,17 @@ export default function MetcalfeAnalysis() {
             <span className="text-white font-semibold text-sm">NCE Portfolio</span>
             <span className="hidden md:block text-gray-600 text-xs">— Kevin Owens · Netflix PM Application</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Network size={14} className="text-red-500" />
-            <span className="text-xs text-gray-500">
-              260M subscribers · <span className="text-red-500 font-bold">33.8B</span> connections
-            </span>
+          <div className="flex items-center gap-4">
+            <Link to="/concepts/watch-together"
+              className="text-xs text-gray-500 hover:text-red-400 transition-colors font-semibold">
+              Product Concepts →
+            </Link>
+            <div className="flex items-center gap-2">
+              <Network size={14} className="text-red-500" />
+              <span className="text-xs text-gray-500">
+                260M subscribers · <span className="text-red-500 font-bold">33.8B</span> connections
+              </span>
+            </div>
           </div>
         </div>
 
