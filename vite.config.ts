@@ -7,13 +7,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    environmentMatchGlobs: [
-      ['tests/unit/**', 'node'],
-    ],
+    include: ['tests/unit/**/*.test.ts', 'src/**/*.test.ts'],
+    exclude: ['tests/e2e/**', 'node_modules/**'],
     setupFiles: [],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
+      include: ['src/lib/**'],
     },
   },
 } as any)
