@@ -8,8 +8,11 @@ import {
 import {
   Users, TrendingUp, Network, Zap, Play, Pause,
   ChevronRight, Info, BarChart2, GitBranch, Layers,
-  Star, Globe, Gamepad2, ShoppingBag, Video,
+  Star, Globe, Gamepad2, ShoppingBag, Video, BookOpen,
 } from 'lucide-react'
+
+// Alias to avoid conflict with the Network lucide icon used elsewhere
+const TasteIcon = Network
 import {
   metcalfeValue, networkConnections, nceScore,
   adoptionModel, formatMillions,
@@ -51,6 +54,8 @@ const PRODUCT_SLUGS: Record<number, string> = {
   2: 'creator-studio',
   3: 'game-night',
   4: 'fan-marketplace',
+  5: 'book-club',
+  6: 'taste-network',
 }
 
 const PRODUCTS: Product[] = [
@@ -129,15 +134,47 @@ const PRODUCTS: Product[] = [
     monetization: 0.92,
     dimensions: { directValue: 65, networkDensity: 55, contentCreation: 40, socialSignal: 70, retentionLift: 68 },
   },
+  {
+    id: 5,
+    name: 'Book Club',
+    shortName: 'Books',
+    description: 'BookTok lives here — reading communities and adaptation discussions tied to Netflix originals.',
+    icon: <BookOpen size={20} />,
+    color: '#22c55e',
+    colorDark: '#15803d',
+    maxUsers: 40,
+    growthRate: 0.50,
+    inflectionQ: 5,
+    engagementRate: 0.68,
+    monetization: 0.48,
+    dimensions: { directValue: 70, networkDensity: 72, contentCreation: 85, socialSignal: 78, retentionLift: 88 },
+  },
+  {
+    id: 6,
+    name: 'Taste Network',
+    shortName: 'Taste',
+    description: 'Your social graph is your recommendation engine — see what taste twins and tastemakers actually watch.',
+    icon: <TasteIcon size={20} />,
+    color: '#6366f1',
+    colorDark: '#4338ca',
+    maxUsers: 55,
+    growthRate: 0.53,
+    inflectionQ: 6,
+    engagementRate: 0.74,
+    monetization: 0.45,
+    dimensions: { directValue: 78, networkDensity: 95, contentCreation: 60, socialSignal: 90, retentionLift: 85 },
+  },
 ]
 
-// 5×5 synergy matrix — cross-product reinforcement scores
+// 7×7 synergy matrix — cross-product reinforcement scores
 const SYNERGY_MATRIX = [
-  [1.00, 0.85, 0.72, 0.68, 0.55],
-  [0.85, 1.00, 0.60, 0.78, 0.62],
-  [0.72, 0.60, 1.00, 0.65, 0.80],
-  [0.68, 0.78, 0.65, 1.00, 0.70],
-  [0.55, 0.62, 0.80, 0.70, 1.00],
+  [1.00, 0.85, 0.72, 0.68, 0.55, 0.62, 0.70],
+  [0.85, 1.00, 0.60, 0.78, 0.62, 0.55, 0.65],
+  [0.72, 0.60, 1.00, 0.65, 0.80, 0.75, 0.72],
+  [0.68, 0.78, 0.65, 1.00, 0.70, 0.50, 0.60],
+  [0.55, 0.62, 0.80, 0.70, 1.00, 0.65, 0.58],
+  [0.62, 0.55, 0.75, 0.50, 0.65, 1.00, 0.82],
+  [0.70, 0.65, 0.72, 0.60, 0.58, 0.82, 1.00],
 ]
 
 const FLYWHEEL_NODES = [
@@ -224,7 +261,7 @@ function OverviewTab({ products, onSelectProduct }: {
         <MetricBadge label="Netflix Subscribers" value="260M" sub="+8M YoY" />
         <MetricBadge label="Network Connections" value="33.8B" sub="potential" />
         <MetricBadge label="Metcalfe Value Index" value="67,600" sub="N² / 1000" />
-        <MetricBadge label="Product Concepts" value="5" sub="analyzed" />
+        <MetricBadge label="Product Concepts" value="7" sub="analyzed" />
       </div>
 
       {/* Product cards */}
