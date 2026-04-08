@@ -504,8 +504,43 @@ function MetcalfeTab({ products }: { products: Product[] }) {
   const currentScore = nceScore(users, engagement, monetization)
   const connections = networkConnections(users)
 
+  // Per-product analyst notes shown as callouts
+  const METCALFE_INSIGHTS: Record<number, string> = {
+    0: 'Watch Together has the steepest connection-density curve of any concept — each new user creates disproportionately more social value because co-viewing sessions create multi-directional connections simultaneously.',
+    1: 'Netflix Live scores highest on monetization factor (0.85) because live events command premium ad rates and drive subscription upgrades at 3–5× the rate of VOD content.',
+    2: 'Creator Studio has a unique NCE profile: low direct monetization but extremely high content-creation dimension (98) — meaning its value compounds through catalog longevity, not immediate revenue.',
+    3: 'Game Night shows the strongest network-density score (88) after Watch Together — multiplayer sessions create dense, tight-knit connection clusters that are the hardest to churn out of.',
+    4: 'Fan Marketplace has the highest monetization factor (0.92) but the lowest network density — it\'s a high-margin, low-virality product. Best built after the social graph exists to drive discovery.',
+    5: 'Book Club shows unusually high retention-lift (88) relative to its monetization score — a signal that retention value significantly exceeds direct revenue value. Build for churn reduction, not revenue.',
+    6: 'Taste Network has the highest network-density score (95) in the entire portfolio — its value is almost entirely network-derived, meaning it needs scale to work but compounds aggressively once it gets there.',
+  }
+
   return (
     <div className="space-y-6">
+      {/* Exec insight header */}
+      <div className="rounded-2xl border border-gray-800 p-5" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 70%)' }}>
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp size={14} className="text-red-500" />
+          <span className="text-xs font-bold text-white uppercase tracking-wider">What This Analysis Shows</span>
+        </div>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          The chart below shows why the first 10M users of a social product barely move the needle — but the next 90M create exponential value. Netflix is already at 260M subscribers. Every social product it ships starts at a point on the curve that most platforms never reach.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {[
+            { label: 'Highest monetization', name: 'Netflix Live', value: '0.85×', color: '#ff6b35', note: 'Live events command premium ad rates' },
+            { label: 'Highest network density', name: 'Taste Network', value: '95/100', color: '#6366f1', note: 'Most network-derived value in portfolio' },
+            { label: 'Fastest connection curve', name: 'Watch Together', value: '92/100', color: '#e50914', note: 'Co-viewing creates multi-directional links' },
+          ].map(item => (
+            <div key={item.name} className="bg-black/30 rounded-xl p-3 border border-gray-800">
+              <div className="text-xs text-gray-500 mb-1">{item.label}</div>
+              <div className="font-bold text-sm mb-0.5" style={{ color: item.color }}>{item.name} — {item.value}</div>
+              <div className="text-xs text-gray-600">{item.note}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Product selector */}
       <div className="flex gap-2 overflow-x-auto pb-1">
         {products.map(p => (
@@ -624,16 +659,9 @@ function MetcalfeTab({ products }: { products: Product[] }) {
           />
 
           {/* Insight */}
-          <div className="bg-black/40 rounded-lg p-3 mt-2">
-            <p className="text-xs text-gray-500 leading-relaxed">
-              At <span className="text-white font-bold">{users}M users</span>, {product.name} creates{' '}
-              <span style={{ color: product.color }} className="font-bold">
-                {(networkConnections(users * 1000) / 1_000_000_000).toFixed(1)}B
-              </span>{' '}
-              unique connections — a <span className="text-white font-bold">
-                {(networkConnections(users * 1000) / (users * 1000) / 1000).toFixed(1)}M×
-              </span> network leverage multiplier.
-            </p>
+          <div className="rounded-lg p-3 mt-2" style={{ background: `${product.color}08`, border: `1px solid ${product.color}20` }}>
+            <div className="text-xs font-bold mb-1" style={{ color: product.color }}>Analyst Note</div>
+            <p className="text-xs text-gray-400 leading-relaxed">{METCALFE_INSIGHTS[product.id]}</p>
           </div>
 
           {/* Radar chart */}
@@ -678,10 +706,35 @@ function SynergyTab({ products }: { products: Product[] }) {
 
   return (
     <div className="space-y-6">
+      {/* Exec insight header */}
+      <div className="rounded-2xl border border-gray-800 p-5" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 70%)' }}>
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp size={14} className="text-red-500" />
+          <span className="text-xs font-bold text-white uppercase tracking-wider">What This Analysis Shows</span>
+        </div>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          These products don't just add value independently — they multiply each other's value. The synergy matrix quantifies how much each concept reinforces the others. The strategic implication: the <strong className="text-white">sequence of builds matters as much as the builds themselves</strong>.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {[
+            { label: 'The social retention triangle', pairs: 'Watch Together × Live × Taste Network', score: '0.85 / 0.70 / 0.65', color: '#e50914', note: 'Build all three and churn impact compounds — not adds' },
+            { label: 'Highest single-pair synergy', pairs: 'Book Club × Taste Network', score: '0.82', color: '#22c55e', note: 'Readers with taste-twins have near-zero churn' },
+            { label: 'Commerce needs the graph first', pairs: 'Marketplace × Creator Studio', score: '0.80', color: '#a855f7', note: 'Fan commerce only works after social graph exists' },
+          ].map(item => (
+            <div key={item.label} className="bg-black/30 rounded-xl p-3 border border-gray-800">
+              <div className="text-xs text-gray-500 mb-1">{item.label}</div>
+              <div className="font-bold text-sm mb-1" style={{ color: item.color }}>{item.pairs}</div>
+              <div className="text-xs text-gray-500 mb-0.5">Score: <span className="text-white font-bold">{item.score}</span></div>
+              <div className="text-xs text-gray-600">{item.note}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="netflix-card p-6">
         <h3 className="text-white font-bold mb-1">Cross-Product Synergy Matrix</h3>
         <p className="text-gray-500 text-sm mb-6">
-          How much each product amplifies the others — higher scores mean stronger network reinforcement.
+          How much each product amplifies the others — hover to highlight. Higher scores mean stronger network reinforcement.
         </p>
 
         {/* Matrix */}
@@ -818,6 +871,44 @@ function FlywheelTab() {
 
   return (
     <div className="space-y-6">
+      {/* Exec insight header */}
+      <div className="rounded-2xl border border-gray-800 p-5" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 70%)' }}>
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp size={14} className="text-red-500" />
+          <span className="text-xs font-bold text-white uppercase tracking-wider">What This Analysis Shows</span>
+        </div>
+        <p className="text-gray-300 text-sm leading-relaxed mb-3">
+          Netflix already has one flywheel: more subscribers → better algorithm → more subscribers. It spins because content investment drives the loop.
+          These seven concepts add a <strong className="text-white">second flywheel</strong> — a social loop that runs in parallel and <em className="text-gray-400">accelerates the first one</em>.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            {
+              label: "Netflix's existing flywheel",
+              loop: 'Content investment → Subscribers → Algorithm → Content signal → Content investment',
+              color: '#666',
+              note: 'Spins on content budget. Slows when content quality drops.',
+            },
+            {
+              label: 'The social flywheel these concepts add',
+              loop: 'Social products → Richer taste graph → Better social proof → Lower churn → More subscribers → Richer taste graph',
+              color: '#e50914',
+              note: 'Spins on subscriber behavior. Accelerates automatically as network grows.',
+            },
+          ].map(item => (
+            <div key={item.label} className="bg-black/30 rounded-xl p-4 border border-gray-800">
+              <div className="text-xs font-bold mb-2" style={{ color: item.color }}>{item.label}</div>
+              <div className="text-xs text-gray-400 leading-relaxed mb-2 italic">"{item.loop}"</div>
+              <div className="text-xs text-gray-600">{item.note}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 p-3 rounded-xl border" style={{ background: 'rgba(229,9,20,0.06)', borderColor: 'rgba(229,9,20,0.2)' }}>
+          <span className="text-xs text-gray-400">The key insight: </span>
+          <span className="text-sm text-white font-semibold">once the social flywheel reaches ~50M active social users, it begins accelerating the content flywheel — better social data improves recommendations, which improves content acquisition decisions, which creates more watch moments.</span>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Flywheel visualization */}
         <div className="netflix-card p-6">
@@ -1034,6 +1125,45 @@ function AdoptionTab({ products }: { products: Product[] }) {
 
   return (
     <div className="space-y-6">
+      {/* Exec insight header */}
+      <div className="rounded-2xl border border-gray-800 p-5" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 70%)' }}>
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp size={14} className="text-red-500" />
+          <span className="text-xs font-bold text-white uppercase tracking-wider">What This Analysis Shows</span>
+        </div>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          The logistic growth model below shows adoption curves for all seven concepts over 12 quarters (3 years). The most important number isn't the peak — it's the <strong className="text-white">inflection quarter</strong>, when growth is fastest. The sequence of builds matters because <strong className="text-white">Wave 1 products need to hit inflection before Wave 2 launches</strong> — the social graph they build is the infrastructure Wave 2 runs on.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {[
+            {
+              label: 'Wave 1 inflection point',
+              detail: 'Watch Together hits Q5, Taste Network hits Q6',
+              implication: 'By the time Netflix Live launches (Wave 2), 40–60M subscribers are already on the social graph',
+              color: '#e50914',
+            },
+            {
+              label: 'The sequencing argument',
+              detail: 'Wave 2 products launch into an existing network, not a cold start',
+              implication: 'Netflix Live\'s social features (shared predictions, live chat) only work if the social graph already exists',
+              color: '#ff6b35',
+            },
+            {
+              label: '3-year portfolio projection',
+              detail: 'Combined TAU: 440M (overlapping) — 260M distinct subscriber ceiling',
+              implication: 'Full portfolio saturation = 100% of subscriber base touched by at least one social product',
+              color: '#f5c518',
+            },
+          ].map(item => (
+            <div key={item.label} className="bg-black/30 rounded-xl p-3 border border-gray-800">
+              <div className="text-xs font-bold mb-1" style={{ color: item.color }}>{item.label}</div>
+              <div className="text-xs text-white mb-1">{item.detail}</div>
+              <div className="text-xs text-gray-600 leading-relaxed">{item.implication}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Controls */}
       <div className="flex flex-wrap gap-4 items-center justify-between">
         <div className="flex gap-2">
