@@ -317,7 +317,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <BookClubMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <BookClubMockup />,
+  execSummary: {
+    why: "Netflix is the world's most prolific book adapter — Bridgerton, Daisy Jones, The Seven Husbands of Evelyn Hugo, Heartstopper, Wednesday — and every adaptation creates a BookTok phenomenon that currently happens entirely off-platform on TikTok, Instagram, and Goodreads.",
+    impact: 'Book Club members watch premiere-week content at 3× the rate of non-members, reducing the post-season churn spike by an estimated 20%. Author events bring non-subscribers into the funnel at near-zero CAC — each appearance generates ~40K external impressions with 3–5% trial conversion.',
+    edge: "The only platform that can offer 'watch the show and discuss the book' is one that has both the show and the subscriber relationship. Netflix has both. Goodreads can host the discussion; only Netflix can connect it to the moment the credits roll.",
+  },
+  kevinsTake: "GWI's audience research consistently showed that book readers are the highest-intent, most culturally influential consumer segment in streaming. They're also the exact subscribers who drive word-of-mouth and show up for premiere week. Book Club isn't a nice-to-have community feature — it's a retention and acquisition product for the segment that matters most to Netflix's cultural authority.",
+}
 
 export default function BookClubPage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

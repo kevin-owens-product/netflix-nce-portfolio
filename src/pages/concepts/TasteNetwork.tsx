@@ -310,7 +310,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <TasteNetworkMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <TasteNetworkMockup />,
+  execSummary: {
+    why: "Every effective content recommendation Netflix subscribers act on happens off-platform — on Reddit threads, group chats, and Twitter. The algorithm tells you what to watch. A trusted friend tells you what you'll be obsessed with. Those are not the same thing, and Netflix has never built the product that captures the second one.",
+    impact: 'Social proof on recommendation shelves converts at 2.8× the rate of algorithm-only picks. Taste Network users churn at 28% lower rates because human validation eliminates the "I can\'t find anything" trigger that causes 40% of passive subscriber churns. No new content budget required.',
+    edge: "No platform has Netflix's depth of viewing data — completion rates, rewatch counts, abandon points — across 260M subscribers to power taste-twin matching at this fidelity. Letterboxd has the social format. Netflix has the data. Taste Network is what happens when you combine them.",
+  },
+  kevinsTake: "My entire career has been about turning data into social trust signals. GWI's core value proposition is 'here's what people like you think' — and our clients paid for it because social proof from a trusted peer consistently outperforms every other signal in changing behavior. Taste Network is that same insight applied to Netflix's most underutilized asset: the behavioral intelligence embedded in 260M viewing histories.",
+}
 
 export default function TasteNetworkPage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

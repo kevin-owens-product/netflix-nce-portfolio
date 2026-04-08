@@ -299,7 +299,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <FanMarketplaceMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <FanMarketplaceMockup />,
+  execSummary: {
+    why: "Netflix's most passionate fans are currently buying Bridgerton tote bags, Stranger Things hoodies, and Wednesday merch from unauthorized third-party sellers. The commerce is already happening — Netflix is just not capturing any of it.",
+    impact: "Official Bridgerton-branded products generated $40M+ in the 6 months following Season 3. Netflix's premiere visibility window — knowing show launch dates 12 months in advance — is a commerce timing advantage no third-party retailer can replicate. Modeled 15–25% direct margin on official lines.",
+    edge: "Netflix knows exactly when its biggest emotional moments happen — the season finales, the character deaths, the cliffhangers — 12 months before they air. That's the commerce superpower. Fan Marketplace turns content schedule knowledge into a just-in-time merch operation.",
+  },
+  kevinsTake: "Commerce and content become natural companions when the purchase is tied to an emotional moment. At GWI, our consumer data showed consistently that the 72 hours around a major cultural event — a finale, a season premiere — are when purchase intent spikes for franchise-adjacent products. Netflix controls the timing of those moments for its own IP. That's not just a commerce advantage; it's a structural one.",
+}
 
 export default function FanMarketplacePage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

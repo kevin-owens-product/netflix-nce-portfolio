@@ -291,7 +291,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <GameNightMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <GameNightMockup />,
+  execSummary: {
+    why: "Netflix's IP portfolio is the most game-able library in media — Stranger Things, Squid Game, Wednesday, The Witcher. Gaming turns passive fans into active participants who are demonstrably harder to churn. Netflix Mobile Games users already show 2× the retention of non-gaming subscribers.",
+    impact: 'Netflix Mobile Games subscribers retain at 2× the rate of non-gaming subscribers. Multiplayer social gaming creates social debt — subscribers stay because their friends are still playing there. Game Night extends that mechanic from mobile to the full subscriber base.',
+    edge: "Netflix owns the IP outright. No licensing negotiations, no revenue-sharing with IP holders, no risk of a competitor outbidding them for the rights. The entire game catalog is already paid for — it's embedded in the content budget.",
+  },
+  kevinsTake: "The thing about multiplayer games is they create social infrastructure, not just engagement. When my friends are mid-season on a Stranger Things trivia bracket, I'm not churning — I have an obligation. That's not a retention metric; it's social debt. Game Night manufactures it at Netflix scale, using IP Netflix already owns.",
+}
 
 export default function GameNightPage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

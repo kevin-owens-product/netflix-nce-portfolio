@@ -320,7 +320,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <CreatorStudioMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <CreatorStudioMockup />,
+  execSummary: {
+    why: "Fan creators are already making Netflix content — video essays, commentary tracks, reaction videos — and building audiences of millions on YouTube. Netflix gets zero revenue from that engagement, zero retention signal, and zero credit for the content that inspired it.",
+    impact: "Estimated $300–600M in annual creator revenue currently flows to YouTube for Netflix-IP content. Creator Studio captures that flywheel inside the platform and turns one-time viewers into subscribers with a reason to stay after the finale drops.",
+    edge: "Only Netflix can offer creators what they actually want: proximity to the source content and a 260M subscriber audience that no YouTube channel can reach. The content is the moat. Creator Studio is just the door.",
+  },
+  kevinsTake: "I've built creator monetization tools at scale. The insight that always held: creators follow the audience, not the platform. Netflix has the audience — 260M subscribers who already love the IP these creators are building on. Creator Studio is not a bet on creators choosing Netflix. It's the product that makes the choice obvious.",
+}
 
 export default function CreatorStudioPage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

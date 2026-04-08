@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Network, TrendingUp, Users, Zap, Target, BarChart2, ChevronRight, Monitor } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Network, TrendingUp, Users, Zap, Target, BarChart2, ChevronRight, Monitor, Lightbulb } from 'lucide-react'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 
@@ -32,6 +32,12 @@ export interface NetworkEffect {
   compounding: string
 }
 
+export interface ExecSummary {
+  why: string      // Strategic rationale — why this concept, why now
+  impact: string   // Business impact — churn, revenue, engagement numbers
+  edge: string     // Netflix's unique advantage — why only Netflix can build this
+}
+
 export interface ConceptData {
   id: string
   name: string
@@ -56,6 +62,8 @@ export interface ConceptData {
   revenueModel: string
   timeline: { phase: string; months: string; milestones: string[] }[]
   mockup?: ReactNode
+  execSummary?: ExecSummary
+  kevinsTake?: string
 }
 
 // ─── Phone mockup shell ────────────────────────────────────────────────────────
@@ -388,6 +396,34 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
       {/* Body */}
       <main className="max-w-6xl mx-auto px-6 py-12">
 
+        {/* Executive Summary */}
+        {concept.execSummary && (
+          <div className="mb-10 rounded-2xl border overflow-hidden" style={{ borderColor: `${concept.color}30`, background: `linear-gradient(135deg, ${concept.colorDark}15 0%, #0d0d0d 70%)` }}>
+            <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: `${concept.color}20` }}>
+              <div className="flex items-center gap-2">
+                <Target size={14} style={{ color: concept.color }} />
+                <span className="text-xs font-bold uppercase tracking-wider text-white">Executive Summary</span>
+              </div>
+              <span className="text-xs text-gray-600">30-second brief</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-800">
+              {[
+                { label: 'Why This', icon: '💡', text: concept.execSummary.why },
+                { label: 'Business Impact', icon: '📈', text: concept.execSummary.impact },
+                { label: "Netflix's Edge", icon: '🔐', text: concept.execSummary.edge },
+              ].map((item, i) => (
+                <div key={i} className="px-6 py-5" style={{ borderColor: `${concept.color}15` }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span style={{ fontSize: 14 }}>{item.icon}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: concept.color }}>{item.label}</span>
+                  </div>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Problem + Target user */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
@@ -425,6 +461,26 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
         <Section title="Network Effect Chain" icon={<Network size={18} />}>
           <NetworkEffectChain effects={concept.networkEffects} color={concept.color} />
         </Section>
+
+        {/* Kevin's Take */}
+        {concept.kevinsTake && (
+          <div className="mb-12 rounded-2xl border p-6" style={{ borderColor: `${concept.color}25`, background: `${concept.color}06` }}>
+            <div className="flex items-start gap-4">
+              <div className="shrink-0">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-black text-white"
+                  style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Lightbulb size={14} style={{ color: concept.color }} />
+                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: concept.color }}>Kevin's Take</span>
+                  <span className="text-gray-600 text-xs">· CPO × 4 · GWI · USC</span>
+                </div>
+                <p className="text-gray-200 leading-relaxed italic">"{concept.kevinsTake}"</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Success metrics */}
         <Section title="Success Metrics & KPIs" icon={<BarChart2 size={18} />}>
@@ -476,6 +532,25 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
             ))}
           </div>
         </Section>
+
+        {/* Author CTA */}
+        <div className="mb-8 rounded-2xl border border-gray-800 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4"
+          style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 70%)' }}>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-black text-white shrink-0"
+              style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
+            <div>
+              <div className="text-white font-bold">Kevin Owens</div>
+              <div className="text-gray-500 text-sm">AI-Driven SaaS Product Leader · CPO × 4 · London</div>
+              <div className="text-gray-600 text-xs mt-0.5">Built audience intelligence products at GWI used by Netflix, Disney+ & Amazon</div>
+            </div>
+          </div>
+          <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+            className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold transition-colors text-center"
+            style={{ background: 'rgba(229,9,20,0.15)', color: '#e50914', border: '1px solid rgba(229,9,20,0.3)' }}>
+            Connect on LinkedIn ↗
+          </a>
+        </div>
 
         {/* Next concept */}
         <div className="border-t border-gray-800 pt-8 flex justify-between items-center">

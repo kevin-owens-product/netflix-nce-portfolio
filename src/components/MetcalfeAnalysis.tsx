@@ -6,7 +6,7 @@ import {
   CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts'
 import {
-  Users, TrendingUp, Network, Zap, Play, Pause,
+  TrendingUp, Network, Zap, Play, Pause,
   ChevronRight, Info, BarChart2, GitBranch, Layers,
   Star, Globe, Gamepad2, ShoppingBag, Video, BookOpen,
 } from 'lucide-react'
@@ -19,6 +19,18 @@ import {
 } from '../lib/calculations'
 import { Analytics } from '../lib/analytics'
 import { featureFlags } from '../lib/featureFlags'
+
+// ─── Exec-facing product metadata ─────────────────────────────────────────────
+
+const PRODUCT_EXEC: Record<number, { priority: number; wave: 1 | 2 | 3; businessCase: string; impact: string; churnDelta?: string }> = {
+  0: { priority: 1, wave: 1, businessCase: 'Highest retention ROI, lowest technical risk — build on existing infra', impact: '-18% churn · 3.2× weekly sessions', churnDelta: '-18%' },
+  6: { priority: 2, wave: 1, businessCase: 'Uses Netflix\'s existing taste data — no new content investment required', impact: '-28% churn · 2.8× recommendation CTR', churnDelta: '-28%' },
+  1: { priority: 3, wave: 2, businessCase: 'Largest revenue ceiling — live events create appointment viewing habit', impact: '108M HH reached · -35% churn vs VOD-only', churnDelta: '-35%' },
+  5: { priority: 4, wave: 2, businessCase: 'Captures BookTok moment before it leaves to Goodreads / TikTok', impact: '3× premiere-week engagement · near-zero CAC', churnDelta: '-20%' },
+  3: { priority: 5, wave: 3, businessCase: 'Existing IP de-risks content bet — Stranger Things, Squid Game, Wednesday', impact: '2× retention in Netflix Mobile Games users', churnDelta: '-15%' },
+  2: { priority: 6, wave: 3, businessCase: 'Captures $300–600M creator revenue currently flowing to YouTube', impact: '+40% catalog engagement · organic acquisition', churnDelta: '-12%' },
+  4: { priority: 7, wave: 3, businessCase: 'Commerce flywheel tied to premiere windows only Netflix knows 12mo out', impact: 'Bridgerton S3: $40M+ merch in 6 months', churnDelta: '-8%' },
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -236,24 +248,63 @@ function OverviewTab({ products, onSelectProduct }: {
   products: Product[]
   onSelectProduct: (id: number, tab: TabId) => void
 }) {
+  const wave1 = products.filter(p => PRODUCT_EXEC[p.id]?.wave === 1).sort((a, b) => PRODUCT_EXEC[a.id].priority - PRODUCT_EXEC[b.id].priority)
+  const wave2 = products.filter(p => PRODUCT_EXEC[p.id]?.wave === 2).sort((a, b) => PRODUCT_EXEC[a.id].priority - PRODUCT_EXEC[b.id].priority)
+  const wave3 = products.filter(p => PRODUCT_EXEC[p.id]?.wave === 3).sort((a, b) => PRODUCT_EXEC[a.id].priority - PRODUCT_EXEC[b.id].priority)
+
   return (
     <div className="space-y-8">
-      {/* Hero */}
-      <div className="text-center py-8">
-        <div className="inline-flex items-center gap-2 bg-red-950/30 border border-red-900/40 rounded-full px-4 py-1.5 mb-4">
-          <Network size={14} className="text-red-500" />
-          <span className="text-xs text-red-400 font-semibold tracking-wider uppercase">
-            Metcalfe's Law Portfolio
-          </span>
+      {/* Author brief */}
+      <div className="rounded-2xl border border-gray-800 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #141414 60%)' }}>
+        <div className="p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-start gap-6">
+            {/* Avatar + credentials */}
+            <div className="flex items-center gap-4 md:flex-col md:items-center md:gap-3 shrink-0">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-black text-white"
+                style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
+              <div className="md:text-center">
+                <div className="text-white font-bold text-sm">Kevin Owens</div>
+                <div className="text-gray-500 text-xs">CPO × 4</div>
+                <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+                  className="text-xs text-red-400 hover:text-red-300 transition-colors mt-1 flex items-center gap-1 md:justify-center">
+                  LinkedIn ↗
+                </a>
+              </div>
+            </div>
+            {/* Thesis */}
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-red-950/30 border border-red-900/40 rounded-full px-3 py-1 mb-3">
+                <Network size={12} className="text-red-500" />
+                <span className="text-xs text-red-400 font-semibold tracking-wider uppercase">Strategic Memo · Netflix PM Application</span>
+              </div>
+              <h1 className="text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
+                Netflix has 260M subscribers.<br />
+                <span className="text-red-500">It's treating them as an audience.</span><br />
+                <span className="text-gray-400 text-2xl font-bold">It should be treating them as a network.</span>
+              </h1>
+              <p className="text-gray-400 leading-relaxed mb-4">
+                Every platform Netflix competes with — YouTube, TikTok, Spotify — is a network where user connections create compound value. Netflix is a broadcast model running on network infrastructure. These seven concepts close that gap, and the math is unambiguous: when subscriber value scales as N², activating the connections between 260M people doesn't add value — it multiplies it.
+              </p>
+              <div className="flex flex-wrap gap-3 text-xs">
+                <div className="bg-black/40 border border-gray-700 rounded-lg px-3 py-2">
+                  <span className="text-gray-500">At GWI I built </span>
+                  <span className="text-white font-bold">audience intelligence products</span>
+                  <span className="text-gray-500"> used by Netflix, Disney+ & Amazon</span>
+                </div>
+                <div className="bg-black/40 border border-gray-700 rounded-lg px-3 py-2">
+                  <span className="text-gray-500">4× CPO experience · </span>
+                  <span className="text-white font-bold">Europe + U.S.</span>
+                  <span className="text-gray-500"> product scaling</span>
+                </div>
+                <div className="bg-black/40 border border-gray-700 rounded-lg px-3 py-2">
+                  <span className="text-gray-500">USC · </span>
+                  <span className="text-white font-bold">AI-native builder</span>
+                  <span className="text-gray-500"> · London-based</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <h1 className="text-5xl font-black text-white mb-3 leading-tight">
-          Network Connection<br />
-          <span className="text-red-500">Effects Analysis</span>
-        </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Seven product concepts that leverage Netflix's 260M subscriber base as a
-          network asset — where value scales as <strong className="text-white">N²</strong>.
-        </p>
       </div>
 
       {/* Stats bar */}
@@ -264,79 +315,131 @@ function OverviewTab({ products, onSelectProduct }: {
         <MetricBadge label="Product Concepts" value="7" sub="analyzed" />
       </div>
 
-      {/* Product cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.map((p, i) => (
-          <div
-            key={p.id}
-            className="netflix-card p-5 cursor-pointer group"
-            onClick={() => onSelectProduct(p.id, 'metcalfe')}
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div
-                className="p-2.5 rounded-lg"
-                style={{ background: `${p.color}20`, color: p.color }}
-              >
-                {p.icon}
+      {/* Priority recommendation */}
+      <div className="netflix-card p-6">
+        <div className="flex items-center gap-2 mb-2">
+          <TrendingUp size={16} className="text-red-500" />
+          <h3 className="text-white font-bold">My Build Recommendation</h3>
+        </div>
+        <p className="text-gray-500 text-sm mb-5">If I were leading product at Netflix, I'd sequence these in three waves — prioritizing proven retention mechanics over new revenue categories.</p>
+        <div className="space-y-4">
+          {[
+            { wave: 1, label: 'Build Now', sub: 'Highest retention ROI · Lowest risk · Existing infrastructure', color: '#e50914', items: wave1 },
+            { wave: 2, label: '12–18 Months', sub: 'Strong revenue case · Moderate investment · New capabilities', color: '#ff6b35', items: wave2 },
+            { wave: 3, label: '18+ Months', sub: 'Platform expansion · Builds on Wave 1 social graph', color: '#f5c518', items: wave3 },
+          ].map(w => (
+            <div key={w.wave} className="flex gap-4 items-start">
+              <div className="shrink-0 flex flex-col items-center gap-1 w-20">
+                <div className="text-xs font-black px-2 py-1 rounded-full text-center"
+                  style={{ background: `${w.color}20`, color: w.color }}>Wave {w.wave}</div>
+                <div className="text-xs text-gray-600 text-center leading-tight">{w.label}</div>
               </div>
-              <div
-                className="text-xs font-semibold px-2 py-1 rounded-full"
-                style={{ background: `${p.color}20`, color: p.color }}
-              >
-                NCE Score: {(nceScore(p.maxUsers, p.engagementRate, p.monetization) / 1000).toFixed(0)}K
-              </div>
-            </div>
-            <h3 className="text-white font-bold text-lg mb-1">{p.name}</h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-4">{p.description}</p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="bg-black/30 rounded p-2">
-                <div className="text-gray-500">Peak Reach</div>
-                <div className="text-white font-bold">{p.maxUsers}M users</div>
-              </div>
-              <div className="bg-black/30 rounded p-2">
-                <div className="text-gray-500">Engagement</div>
-                <div className="text-white font-bold">{(p.engagementRate * 100).toFixed(0)}%</div>
-              </div>
-            </div>
-            <Link
-              to={`/concepts/${PRODUCT_SLUGS[p.id]}`}
-              onClick={e => e.stopPropagation()}
-              className="mt-3 flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all"
-              style={{ color: p.color }}
-            >
-              View Concept <ChevronRight size={14} />
-            </Link>
-          </div>
-        ))}
-
-        {/* Combined value card */}
-        <div className="netflix-card p-5 border-red-900/40" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #1f0505 100%)' }}>
-          <div className="flex items-center gap-2 mb-3">
-            <Globe size={20} className="text-red-500" />
-            <span className="text-red-400 font-bold text-sm uppercase tracking-wider">Combined Portfolio</span>
-          </div>
-          <div className="text-4xl font-black text-white mb-1">
-            {formatMillions(products.reduce((s, p) => s + p.maxUsers, 0))}
-          </div>
-          <div className="text-gray-500 text-sm mb-4">total addressable users</div>
-          <div className="space-y-2">
-            {products.map(p => (
-              <div key={p.id} className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
-                <div className="text-xs text-gray-400 flex-1">{p.shortName}</div>
-                <div className="h-1.5 rounded-full flex-1 bg-gray-800 overflow-hidden">
-                  <div
-                    className="h-full rounded-full transition-all"
-                    style={{
-                      width: `${(p.maxUsers / 110) * 100}%`,
-                      background: p.color,
-                    }}
-                  />
+              <div className="flex-1">
+                <div className="text-xs text-gray-600 mb-2">{w.sub}</div>
+                <div className="flex flex-wrap gap-2">
+                  {w.items.map(p => {
+                    const exec = PRODUCT_EXEC[p.id]
+                    return (
+                      <Link key={p.id} to={`/concepts/${PRODUCT_SLUGS[p.id]}`}
+                        className="flex items-center gap-2 rounded-xl border px-3 py-2 hover:border-gray-600 transition-colors group"
+                        style={{ background: `${p.color}08`, borderColor: `${p.color}25` }}>
+                        <span style={{ color: p.color }}>{p.icon}</span>
+                        <div>
+                          <div className="text-white text-xs font-bold">{p.name}</div>
+                          <div className="text-xs" style={{ color: p.color }}>{exec.churnDelta} churn</div>
+                        </div>
+                      </Link>
+                    )
+                  })}
                 </div>
-                <div className="text-xs text-white font-bold w-10 text-right">{p.maxUsers}M</div>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Product cards */}
+      <div>
+        <h2 className="text-white font-bold text-lg mb-4">All Seven Concepts</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {products
+            .slice()
+            .sort((a, b) => PRODUCT_EXEC[a.id].priority - PRODUCT_EXEC[b.id].priority)
+            .map((p, i) => {
+            const exec = PRODUCT_EXEC[p.id]
+            return (
+              <div
+                key={p.id}
+                className="netflix-card p-5 cursor-pointer group"
+                onClick={() => onSelectProduct(p.id, 'metcalfe')}
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2.5 rounded-lg" style={{ background: `${p.color}20`, color: p.color }}>{p.icon}</div>
+                    <div className="text-xs font-black px-2 py-1 rounded-full" style={{ background: `${p.color}15`, color: p.color }}>
+                      #{exec.priority} Priority
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-600 font-semibold">
+                    Wave {exec.wave}
+                  </div>
+                </div>
+                <h3 className="text-white font-bold text-lg mb-1">{p.name}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-3">{p.description}</p>
+                {/* Business case */}
+                <div className="bg-black/30 rounded-lg p-2.5 mb-3 border border-gray-800">
+                  <div className="text-gray-600 text-xs mb-1">Business case</div>
+                  <div className="text-gray-300 text-xs leading-snug">{exec.businessCase}</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+                  <div className="bg-black/30 rounded p-2">
+                    <div className="text-gray-500">Peak Reach</div>
+                    <div className="text-white font-bold">{p.maxUsers}M users</div>
+                  </div>
+                  <div className="bg-black/30 rounded p-2">
+                    <div className="text-gray-500">Impact</div>
+                    <div className="font-bold" style={{ color: p.color }}>{exec.churnDelta} churn</div>
+                  </div>
+                </div>
+                <Link
+                  to={`/concepts/${PRODUCT_SLUGS[p.id]}`}
+                  onClick={e => e.stopPropagation()}
+                  className="flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all"
+                  style={{ color: p.color }}
+                >
+                  Full concept brief <ChevronRight size={14} />
+                </Link>
+              </div>
+            )
+          })}
+
+          {/* Combined value card */}
+          <div className="netflix-card p-5 border-red-900/40" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #1f0505 100%)' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <Globe size={20} className="text-red-500" />
+              <span className="text-red-400 font-bold text-sm uppercase tracking-wider">Combined Portfolio</span>
+            </div>
+            <div className="text-4xl font-black text-white mb-1">
+              {formatMillions(products.reduce((s, p) => s + p.maxUsers, 0))}
+            </div>
+            <div className="text-gray-500 text-sm mb-4">total addressable users</div>
+            <div className="space-y-2">
+              {products
+                .slice()
+                .sort((a, b) => PRODUCT_EXEC[a.id].priority - PRODUCT_EXEC[b.id].priority)
+                .map(p => (
+                <div key={p.id} className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
+                  <div className="text-xs text-gray-400 flex-1">{p.shortName}</div>
+                  <div className="h-1.5 rounded-full flex-1 bg-gray-800 overflow-hidden">
+                    <div className="h-full rounded-full transition-all"
+                      style={{ width: `${(p.maxUsers / 110) * 100}%`, background: p.color }} />
+                  </div>
+                  <div className="text-xs text-white font-bold w-10 text-right">{p.maxUsers}M</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -1083,19 +1186,18 @@ export default function MetcalfeAnalysis() {
             <div className="text-red-500 font-black text-2xl tracking-tighter">N</div>
             <div className="h-5 w-px bg-gray-700" />
             <span className="text-white font-semibold text-sm">NCE Portfolio</span>
-            <span className="hidden md:block text-gray-600 text-xs">— Kevin Owens · Netflix PM Application</span>
+            <span className="hidden md:block text-gray-600 text-xs">— Kevin Owens · CPO × 4</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link to="/concepts/watch-together"
-              className="text-xs text-gray-500 hover:text-red-400 transition-colors font-semibold">
-              Product Concepts →
+              className="text-xs text-gray-500 hover:text-red-400 transition-colors font-semibold hidden md:block">
+              7 Concepts →
             </Link>
-            <div className="flex items-center gap-2">
-              <Network size={14} className="text-red-500" />
-              <span className="text-xs text-gray-500">
-                260M subscribers · <span className="text-red-500 font-bold">33.8B</span> connections
-              </span>
-            </div>
+            <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
+              style={{ background: 'rgba(229,9,20,0.15)', color: '#e50914', border: '1px solid rgba(229,9,20,0.3)' }}>
+              Connect on LinkedIn ↗
+            </a>
           </div>
         </div>
 
@@ -1133,19 +1235,19 @@ export default function MetcalfeAnalysis() {
       <footer className="border-t border-gray-800 mt-16 py-8">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <div>
-            <div className="text-white font-bold mb-1">Netflix NCE Portfolio</div>
+            <div className="text-white font-bold mb-1">Kevin Owens · Netflix PM Application</div>
             <div className="text-gray-600 text-xs">
-              Kevin Owens · Senior PM Application · Network Connection Effects Analysis
+              AI-Driven SaaS Product Leader · CPO × 4 · Scaled Products Across Europe & U.S.
             </div>
           </div>
-          <div className="flex items-center gap-4 text-xs text-gray-600">
-            <div className="flex items-center gap-1.5">
-              <Users size={12} className="text-red-500" />
-              <span>Metcalfe's Law: V = N²</span>
-            </div>
-            <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-4 text-xs">
+            <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+              className="text-red-400 hover:text-red-300 transition-colors font-semibold">
+              linkedin.com/in/kevinaowens ↗
+            </a>
+            <div className="flex items-center gap-1.5 text-gray-600">
               <Zap size={12} className="text-red-500" />
-              <span>5 Product Concepts</span>
+              <span>7 Product Concepts</span>
             </div>
           </div>
         </div>

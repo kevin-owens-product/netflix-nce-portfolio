@@ -321,7 +321,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <NetflixLiveMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <NetflixLiveMockup />,
+  execSummary: {
+    why: "Live is the only content format that creates genuine appointment viewing — and appointment viewing is the single most powerful churn prevention mechanism in media. Netflix's Jake Paul vs. Mike Tyson fight reached 108M households in a single evening. That is not a content win; it's proof of infrastructure.",
+    impact: 'Sports subscribers churn at 35–50% lower rates than VOD-only subscribers across every major streaming service. Live event programming creates predictable high-engagement spikes that keep subscribers active in the content-drought weeks between seasons.',
+    edge: "Netflix's 260M global subscriber base makes it the only platform that can deliver live events as simultaneously appointment TV in every major market. Disney has ESPN; Amazon has Thursday Night Football. Netflix has scale and zero rights commitments — the blank-slate advantage.",
+  },
+  kevinsTake: "The consumer data from GWI's research showed the same pattern everywhere I looked: subscribers who have 'must-watch' content — a live event, a finale, a cultural moment — churn at half the rate of passive consumers. Live doesn't just add a content category. It manufactures appointment viewing, which is the retention mechanic every streaming service is trying to buy and most can't build.",
+}
 
 export default function NetflixLivePage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />

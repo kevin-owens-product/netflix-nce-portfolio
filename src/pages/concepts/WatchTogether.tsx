@@ -317,7 +317,16 @@ const concept: ConceptData = {
   ],
 }
 
-const conceptWithMockup: ConceptData = { ...concept, mockup: <WatchTogetherMockup /> }
+const conceptWithMockup: ConceptData = {
+  ...concept,
+  mockup: <WatchTogetherMockup />,
+  execSummary: {
+    why: 'Social co-viewing already happens — via Zoom, Discord, and Teleparty — but entirely off-platform. Netflix loses the engagement signal, the retention lift, and the habitual return visit every time subscribers watch together somewhere else.',
+    impact: 'Modeled -18% churn among weekly co-viewers. Pilot data from Disney+ Party Watch suggests 40%+ higher 6-month retention in shared-session cohorts. Watch Together sessions average 3.2× the weekly app-open rate of solo viewers.',
+    edge: 'Netflix has the licensed content, the subscriber relationships, and the global CDN infrastructure to make co-viewing native and frictionless in a way no third-party Chrome extension ever can. Teleparty has 10M users — Netflix has 260M.',
+  },
+  kevinsTake: 'At GWI I spent years studying how product usage patterns become social habits. The data was consistent: when you turn individual consumption into shared ritual, churn drops dramatically — not because the content is better, but because leaving means letting someone else down. Watch Together is the simplest possible product to manufacture that dynamic at Netflix scale.',
+}
 
 export default function WatchTogetherPage() {
   return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
