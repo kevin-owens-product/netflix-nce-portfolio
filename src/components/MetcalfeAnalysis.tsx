@@ -307,6 +307,50 @@ function OverviewTab({ products, onSelectProduct }: {
         </div>
       </div>
 
+      {/* Market Signal — Netflix Playground launch */}
+      <div className="rounded-2xl border overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(245,197,24,0.08) 0%, #141414 60%)', borderColor: 'rgba(245,197,24,0.3)' }}>
+        <div className="p-5 md:p-6">
+          <div className="flex items-start gap-4">
+            <div className="shrink-0 flex flex-col items-center gap-1">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block w-2 h-2 rounded-full animate-pulse" style={{ background: '#f5c518' }} />
+                <span className="text-xs font-black uppercase tracking-wider" style={{ color: '#f5c518' }}>Live</span>
+              </div>
+              <div className="text-xs text-gray-600">Apr 8, 2026</div>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <div className="text-xs font-black px-2 py-1 rounded-full" style={{ background: 'rgba(245,197,24,0.15)', color: '#f5c518' }}>Market Signal</div>
+                <span className="text-xs text-gray-500">Netflix just validated the interactive-engagement thesis</span>
+              </div>
+              <h3 className="text-white font-bold text-lg md:text-xl mb-2 leading-tight">
+                Netflix shipped <a href="https://about.netflix.com/en/news/netflix-expands-kids-entertainment-lineup-with-playground-app-for-games" target="_blank" rel="noreferrer" className="underline decoration-dotted hover:text-yellow-400 transition-colors" style={{ color: '#f5c518' }}>Playground</a> this week — a dedicated games app for kids 8 and under. Global rollout April 28.
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                <span className="text-white font-semibold">What this confirms: </span>
+                Netflix is actively extending from passive viewing to active engagement. They just did it for kids. The unserved segment is the one Netflix's biggest cultural properties actually target — <span className="text-white">adults who love Stranger Things, Squid Game, Wednesday, and Love Is Blind</span>.
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                <span className="font-semibold" style={{ color: '#f5c518' }}>Game Night is the adult version of Playground — </span>
+                same core insight (IP + interactive engagement = retention), different audience (the 250M+ subscribers over 8). The strategic direction is already blessed by leadership. The question isn't whether Netflix should extend this to adults — it's who leads it.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link to="/concepts/game-night"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full transition-all hover:brightness-110"
+                  style={{ background: 'rgba(245,197,24,0.15)', color: '#f5c518', border: '1px solid rgba(245,197,24,0.3)' }}>
+                  See the Game Night concept
+                  <ChevronRight size={14} />
+                </Link>
+                <a href="https://about.netflix.com/en/news/netflix-expands-kids-entertainment-lineup-with-playground-app-for-games" target="_blank" rel="noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
+                  Read Netflix's announcement ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Stats bar */}
       <div className="grid grid-cols-4 gap-4">
         <MetricBadge label="Netflix Subscribers" value="260M" sub="+8M YoY" />

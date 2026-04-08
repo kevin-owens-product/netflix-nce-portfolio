@@ -64,6 +64,7 @@ export interface ConceptData {
   mockup?: ReactNode
   execSummary?: ExecSummary
   kevinsTake?: string
+  marketSignal?: ReactNode
 }
 
 // ─── Phone mockup shell ────────────────────────────────────────────────────────
@@ -395,6 +396,11 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
 
       {/* Body */}
       <main className="max-w-6xl mx-auto px-6 py-12">
+
+        {/* Market signal (optional) */}
+        {concept.marketSignal && (
+          <div className="mb-10">{concept.marketSignal}</div>
+        )}
 
         {/* Executive Summary */}
         {concept.execSummary && (

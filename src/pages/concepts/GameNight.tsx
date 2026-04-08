@@ -291,15 +291,63 @@ const concept: ConceptData = {
   ],
 }
 
+function PlaygroundMarketSignal() {
+  return (
+    <div className="rounded-2xl border overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(245,197,24,0.1) 0%, #141414 60%)', borderColor: 'rgba(245,197,24,0.35)' }}>
+      <div className="p-5 md:p-6">
+        <div className="flex items-start gap-4">
+          <div className="shrink-0 flex flex-col items-center gap-1">
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block w-2 h-2 rounded-full animate-pulse" style={{ background: '#f5c518' }} />
+              <span className="text-xs font-black uppercase tracking-wider" style={{ color: '#f5c518' }}>Breaking</span>
+            </div>
+            <div className="text-xs text-gray-600">Apr 8, 2026</div>
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <div className="text-xs font-black px-2 py-1 rounded-full" style={{ background: 'rgba(245,197,24,0.15)', color: '#f5c518' }}>Market Signal</div>
+              <span className="text-xs text-gray-500">Netflix just validated the thesis — for kids. Adults are next.</span>
+            </div>
+            <h3 className="text-white font-bold text-lg md:text-xl mb-3 leading-tight">
+              Netflix shipped <a href="https://about.netflix.com/en/news/netflix-expands-kids-entertainment-lineup-with-playground-app-for-games" target="_blank" rel="noreferrer" className="underline decoration-dotted hover:text-yellow-400 transition-colors" style={{ color: '#f5c518' }}>Playground</a> this week — a standalone games app for children 8 and under. Global rollout April 28, 2026.
+            </h3>
+            <div className="space-y-3 text-sm text-gray-400 leading-relaxed">
+              <p>
+                <span className="text-white font-semibold">What Playground proves: </span>
+                Netflix is willing to build dedicated interactive experiences tied to its IP. No ads, no in-app purchases, offline-playable — exactly the kind of premium standalone app that signals long-term strategic commitment, not an experiment.
+              </p>
+              <p>
+                <span className="text-white font-semibold">What Playground doesn't do: </span>
+                serve adults. It's locked to kids 8 and under with kids' IP (Peppa Pig, Sesame Street, Dr. Seuss). The 250M+ Netflix subscribers who are <em>not</em> children — the ones who binge Stranger Things, Squid Game, Wednesday, and Love Is Blind — have no interactive product tied to the content they actually watch.
+              </p>
+              <p className="pt-1" style={{ color: '#f5c518' }}>
+                <strong>Game Night is the adult Playground.</strong> Same architectural thesis (standalone interactive experience tied to Netflix IP). Different audience. Bigger addressable market. And the strategic direction is already blessed by the exec who signed off on Playground.
+              </p>
+            </div>
+            <div className="mt-4 pt-4 border-t border-gray-800 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white" style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
+              <div>
+                <div className="text-white text-sm font-bold">Kevin's real-time reframe</div>
+                <div className="text-gray-600 text-xs">Added 2 hours after Netflix's announcement — this is what it looks like to have a PM who reads the news</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const conceptWithMockup: ConceptData = {
   ...concept,
   mockup: <GameNightMockup />,
+  marketSignal: <PlaygroundMarketSignal />,
   execSummary: {
-    why: "Netflix's IP portfolio is the most game-able library in media — Stranger Things, Squid Game, Wednesday, The Witcher. Gaming turns passive fans into active participants who are demonstrably harder to churn. Netflix Mobile Games users already show 2× the retention of non-gaming subscribers.",
-    impact: 'Netflix Mobile Games subscribers retain at 2× the rate of non-gaming subscribers. Multiplayer social gaming creates social debt — subscribers stay because their friends are still playing there. Game Night extends that mechanic from mobile to the full subscriber base.',
-    edge: "Netflix owns the IP outright. No licensing negotiations, no revenue-sharing with IP holders, no risk of a competitor outbidding them for the rights. The entire game catalog is already paid for — it's embedded in the content budget.",
+    why: "Netflix just launched Playground (April 2026) — a games app for kids 8 and under — proving they're committed to extending from passive viewing to active engagement. Game Night is the adult version of the same thesis: take Netflix's most game-able IP (Stranger Things, Squid Game, Wednesday, The Witcher) and make it multiplayer and social.",
+    impact: 'Netflix Mobile Games subscribers retain at 2× the rate of non-gaming subscribers. Multiplayer social gaming creates social debt — subscribers stay because their friends are still playing there. Game Night extends that mechanic from mobile solo play to shared group experiences.',
+    edge: "Netflix owns the IP outright. No licensing, no revenue-sharing, no rights auctions. The entire game catalog is already paid for — it's embedded in the content budget. Playground just proved leadership is willing to build the infrastructure; Game Night is the obvious next audience.",
   },
-  kevinsTake: "The thing about multiplayer games is they create social infrastructure, not just engagement. When my friends are mid-season on a Stranger Things trivia bracket, I'm not churning — I have an obligation. That's not a retention metric; it's social debt. Game Night manufactures it at Netflix scale, using IP Netflix already owns.",
+  kevinsTake: "Playground is the tell. Netflix didn't ship it because kids' games are a huge market — they shipped it because interactive IP engagement works as a retention mechanic, and kids were the easiest segment to prove the thesis on (simpler gameplay, lower production costs, clearer safety rules). The adult version — multiplayer, social, tied to Netflix's biggest cultural properties — is where the real retention lift lives. Game Night is that version. And now the direction is already validated.",
 }
 
 export default function GameNightPage() {
