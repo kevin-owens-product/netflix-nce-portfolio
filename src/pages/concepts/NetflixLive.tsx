@@ -1,6 +1,118 @@
 import { Zap, Radio, Trophy, Vote, Calendar, TrendingUp, MessageSquare, Award } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function NetflixLiveMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      {/* Screen 1: Live event */}
+      <PhoneMockup label="Live event screen — real-time viewer count + prediction">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Netflix Live" />
+          {/* Hero live card */}
+          <div style={{ margin: '8px 10px', borderRadius: 12, overflow: 'hidden', background: 'linear-gradient(135deg, #0a0a0a, #1a0505)', border: '1px solid rgba(229,9,20,0.3)', position: 'relative' }}>
+            {/* Live badge */}
+            <div style={{ position: 'absolute', top: 8, left: 8, background: '#e50914', borderRadius: 4, padding: '2px 6px', fontSize: 8, fontWeight: 900, color: '#fff', letterSpacing: 0.5, display: 'flex', alignItems: 'center', gap: 3 }}>
+              <span style={{ display: 'inline-block', width: 5, height: 5, borderRadius: '50%', background: '#fff', animation: 'pulse 1s infinite' }} />
+              LIVE
+            </div>
+            {/* Viewer count */}
+            <div style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(0,0,0,0.7)', borderRadius: 4, padding: '2px 6px', fontSize: 8, fontWeight: 700, color: '#fff' }}>👁 4.2M watching</div>
+            {/* Content */}
+            <div style={{ padding: '28px 12px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+              <div style={{ fontSize: 24 }}>🏆</div>
+              <div style={{ color: '#fff', fontSize: 11, fontWeight: 900, textAlign: 'center', letterSpacing: -0.5 }}>F1 MIAMI GRAND PRIX</div>
+              <div style={{ color: '#ff6b35', fontSize: 9, fontWeight: 700 }}>LAP 42 / 57 · VERSTAPPEN +3.2s</div>
+              <div style={{ background: '#e50914', borderRadius: 6, padding: '6px 20px', fontSize: 10, fontWeight: 800, color: '#fff', marginTop: 4 }}>▶  Watch Now</div>
+            </div>
+          </div>
+          {/* Prediction */}
+          <div style={{ margin: '0 10px 8px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.2)', borderRadius: 10, padding: '8px 10px' }}>
+            <div style={{ color: '#ff6b35', fontSize: 8, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>🔮 Live Prediction</div>
+            <div style={{ color: '#fff', fontSize: 9, fontWeight: 600, marginBottom: 8 }}>Who wins today?</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ name: 'Verstappen', pct: 64 }, { name: 'Norris', pct: 36 }].map((opt, i) => (
+                <div key={i} style={{ flex: 1, background: i === 0 ? 'rgba(255,107,53,0.2)' : 'rgba(255,255,255,0.05)', border: i === 0 ? '1px solid rgba(255,107,53,0.5)' : '1px solid rgba(255,255,255,0.1)', borderRadius: 6, padding: '5px 6px', textAlign: 'center' }}>
+                  <div style={{ color: '#fff', fontSize: 8, fontWeight: 700 }}>{opt.name}</div>
+                  <div style={{ color: i === 0 ? '#ff6b35' : '#888', fontSize: 10, fontWeight: 900 }}>{opt.pct}%</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ color: '#555', fontSize: 7, marginTop: 4, textAlign: 'center' }}>1.8M predictions · closes lap 50</div>
+          </div>
+          {/* Up next */}
+          <div style={{ padding: '0 10px' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Up Next Live</div>
+            {[
+              { emoji: '🎤', title: 'Love Is Blind Live Reunion', time: 'Tonight 8pm ET', viewers: '2.1M reminded' },
+              { emoji: '🥊', title: 'Netflix Boxing: Fury vs Ngannou 2', time: 'Sat Jun 15', viewers: '890K reminded' },
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 8, background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '6px 8px' }}>
+                <div style={{ fontSize: 16 }}>{item.emoji}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: '#ddd', fontSize: 8, fontWeight: 700 }}>{item.title}</div>
+                  <div style={{ color: '#555', fontSize: 7 }}>{item.time} · {item.viewers}</div>
+                </div>
+                <div style={{ background: 'rgba(255,107,53,0.15)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: 4, padding: '2px 6px', fontSize: 7, fontWeight: 700, color: '#ff6b35' }}>🔔</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="New & Hot" />
+        </div>
+      </PhoneMockup>
+
+      {/* Screen 2: Live voting overlay */}
+      <PhoneMockup label="Interactive voting overlay during Love Is Blind">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Love Is Blind — LIVE" back />
+          {/* Video */}
+          <div style={{ background: '#000', aspectRatio: '16/9', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ color: '#888', fontSize: 8 }}>[ LIVE STREAM ]</div>
+            <div style={{ position: 'absolute', top: 6, left: 6, background: '#e50914', borderRadius: 4, padding: '2px 6px', fontSize: 7, fontWeight: 900, color: '#fff' }}>● LIVE</div>
+            <div style={{ position: 'absolute', top: 6, right: 6, color: '#fff', fontSize: 7, background: 'rgba(0,0,0,0.6)', borderRadius: 4, padding: '2px 5px' }}>👁 3.4M</div>
+          </div>
+          {/* Vote card */}
+          <div style={{ margin: '8px 10px', background: 'linear-gradient(135deg, rgba(229,9,20,0.12), rgba(255,107,53,0.08))', border: '1px solid rgba(229,9,20,0.25)', borderRadius: 12, padding: '10px 12px' }}>
+            <div style={{ color: '#ff6b35', fontSize: 8, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>🗳 LIVE VOTE · 2:14 remaining</div>
+            <div style={{ color: '#fff', fontSize: 10, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>Will Tiffany say yes at the altar?</div>
+            {/* Progress bar */}
+            <div style={{ height: 3, background: '#222', borderRadius: 2, marginBottom: 8, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: '30%', background: 'linear-gradient(90deg, #e50914, #ff6b35)', borderRadius: 2 }} />
+            </div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <button style={{ flex: 1, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.4)', borderRadius: 8, padding: '8px 4px', cursor: 'pointer' }}>
+                <div style={{ fontSize: 14 }}>💍</div>
+                <div style={{ color: '#22c55e', fontSize: 9, fontWeight: 800 }}>YES</div>
+                <div style={{ color: '#555', fontSize: 8 }}>67%</div>
+              </button>
+              <button style={{ flex: 1, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '8px 4px', cursor: 'pointer' }}>
+                <div style={{ fontSize: 14 }}>💔</div>
+                <div style={{ color: '#ef4444', fontSize: 9, fontWeight: 800 }}>NO</div>
+                <div style={{ color: '#555', fontSize: 8 }}>33%</div>
+              </button>
+            </div>
+            <div style={{ color: '#555', fontSize: 7, textAlign: 'center', marginTop: 6 }}>2.1M votes cast</div>
+          </div>
+          {/* Live chat preview */}
+          <div style={{ flex: 1, padding: '0 10px', overflow: 'hidden' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Live Chat</div>
+            {[
+              { name: 'jenna_m', msg: 'SHE IS GOING TO SAY NO I CAN FEEL IT', color: '#f5c518' },
+              { name: 'tv_lover99', msg: 'the way he looked at her omg 😭', color: '#3b82f6' },
+              { name: 'drama_queen', msg: 'voted YES, manifesting for them', color: '#a855f7' },
+            ].map((c, i) => (
+              <div key={i} style={{ marginBottom: 5 }}>
+                <span style={{ color: c.color, fontSize: 8, fontWeight: 700 }}>{c.name}: </span>
+                <span style={{ color: '#aaa', fontSize: 8 }}>{c.msg}</span>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="New & Hot" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'netflix-live',
@@ -209,6 +321,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <NetflixLiveMockup /> }
+
 export default function NetflixLivePage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

@@ -1,6 +1,114 @@
 import { BookOpen, Users, MessageCircle, TrendingUp, Star, Bell, Globe, Layers } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function BookClubMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      <PhoneMockup label="Book Club prompt after finishing Daisy Jones">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Book Club" back />
+          {/* Post-show prompt */}
+          <div style={{ margin: '8px 10px', background: 'linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.04))', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 12, padding: '12px 12px' }}>
+            <div style={{ color: '#22c55e', fontSize: 7, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>📚 Book Club</div>
+            <div style={{ color: '#fff', fontSize: 10, fontWeight: 800, lineHeight: 1.3, marginBottom: 4 }}>The show was adapted from a bestselling novel</div>
+            <div style={{ color: '#888', fontSize: 8, marginBottom: 10, lineHeight: 1.4 }}>14,200 subscribers have read Daisy Jones & The Six — join the discussion</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <div style={{ background: '#22c55e', borderRadius: 6, padding: '6px 14px', fontSize: 9, fontWeight: 800, color: '#fff' }}>Join Book Club</div>
+              <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 6, padding: '6px 10px', fontSize: 9, color: '#888' }}>Not now</div>
+            </div>
+          </div>
+          {/* Reading group */}
+          <div style={{ padding: '0 12px' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Your Reading Group</div>
+            {[
+              { initials: 'SL', name: 'Sarah L.', color: '#3b82f6', progress: 'Chapter 8', status: '🟢 Reading now' },
+              { initials: 'MR', name: 'Mike R.', color: '#22c55e', progress: 'Finished!', status: '✅ Done' },
+              { initials: 'JK', name: 'Jess K.', color: '#f5c518', progress: 'Chapter 3', status: '🟡 Just started' },
+            ].map((m, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                <div style={{ width: 26, height: 26, borderRadius: '50%', background: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 900, color: '#fff', flexShrink: 0 }}>{m.initials}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: '#ddd', fontSize: 9, fontWeight: 600 }}>{m.name}</div>
+                  <div style={{ color: '#555', fontSize: 7 }}>{m.progress}</div>
+                </div>
+                <div style={{ color: '#888', fontSize: 7 }}>{m.status}</div>
+              </div>
+            ))}
+          </div>
+          {/* Discussion threads */}
+          <div style={{ padding: '0 12px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 8, marginTop: 4 }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Recent Discussions</div>
+            {[
+              { title: 'The ending was completely different from the show', chapter: 'Ch. 28 · Spoilers', replies: 42 },
+              { title: 'Did Billy deserve his redemption arc?', chapter: 'Ch. 14 · No spoilers', replies: 27 },
+            ].map((t, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '7px 9px', marginBottom: 6 }}>
+                <div style={{ color: '#ddd', fontSize: 8, fontWeight: 600, lineHeight: 1.3 }}>{t.title}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
+                  <span style={{ color: '#22c55e', fontSize: 7 }}>{t.chapter}</span>
+                  <span style={{ color: '#555', fontSize: 7 }}>{t.replies} replies</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      <PhoneMockup label="Book vs Show comparison — chapter-by-chapter breakdown">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Book vs Show" back />
+          {/* Header */}
+          <div style={{ padding: '8px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
+            <div style={{ flex: 1, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 8, padding: '6px 8px', textAlign: 'center' }}>
+              <div style={{ color: '#22c55e', fontSize: 8, fontWeight: 900 }}>📖 Book</div>
+              <div style={{ color: '#888', fontSize: 7 }}>Taylor Jenkins Reid</div>
+            </div>
+            <div style={{ flex: 1, background: 'rgba(229,9,20,0.08)', border: '1px solid rgba(229,9,20,0.2)', borderRadius: 8, padding: '6px 8px', textAlign: 'center' }}>
+              <div style={{ color: '#e50914', fontSize: 8, fontWeight: 900 }}>🎬 Show</div>
+              <div style={{ color: '#888', fontSize: 7 }}>Amazon/Netflix Adaptation</div>
+            </div>
+          </div>
+          {/* Comparison items */}
+          <div style={{ padding: '8px 10px', flex: 1, overflow: 'auto' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Key Differences</div>
+            {[
+              { type: 'Changed', title: "Daisy's backstory", detail: 'Much more detail in book', color: '#f5c518', emoji: '✏️' },
+              { type: 'Cut', title: "Graham's subplot", detail: 'Removed entirely from show', color: '#ef4444', emoji: '✂️' },
+              { type: 'Added', title: 'Concert visuals', detail: 'Enhanced for screen only', color: '#22c55e', emoji: '✨' },
+              { type: 'Changed', title: 'The ending', detail: 'More ambiguous in novel', color: '#f5c518', emoji: '✏️' },
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 8, background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '7px 9px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ width: 22, height: 22, borderRadius: 6, background: `${item.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0 }}>{item.emoji}</div>
+                <div>
+                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 2 }}>
+                    <span style={{ background: `${item.color}20`, color: item.color, fontSize: 6, fontWeight: 900, padding: '1px 4px', borderRadius: 3, textTransform: 'uppercase' }}>{item.type}</span>
+                    <span style={{ color: '#ddd', fontSize: 8, fontWeight: 600 }}>{item.title}</span>
+                  </div>
+                  <div style={{ color: '#666', fontSize: 7 }}>{item.detail}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Rating section */}
+          <div style={{ padding: '6px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
+            <div style={{ flex: 1, textAlign: 'center' }}>
+              <div style={{ color: '#aaa', fontSize: 7, marginBottom: 2 }}>Book rating</div>
+              <div style={{ color: '#22c55e', fontSize: 14, fontWeight: 900 }}>4.6 ★</div>
+            </div>
+            <div style={{ width: 1, background: 'rgba(255,255,255,0.08)' }} />
+            <div style={{ flex: 1, textAlign: 'center' }}>
+              <div style={{ color: '#aaa', fontSize: 7, marginBottom: 2 }}>Show rating</div>
+              <div style={{ color: '#e50914', fontSize: 14, fontWeight: 900 }}>4.1 ★</div>
+            </div>
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'book-club',
@@ -209,6 +317,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <BookClubMockup /> }
+
 export default function BookClubPage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

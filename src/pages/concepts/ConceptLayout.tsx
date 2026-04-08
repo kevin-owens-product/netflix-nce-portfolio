@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Network, TrendingUp, Users, Zap, Target, BarChart2, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Network, TrendingUp, Users, Zap, Target, BarChart2, ChevronRight, Monitor } from 'lucide-react'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 
@@ -55,6 +55,87 @@ export interface ConceptData {
   maxUsers: number
   revenueModel: string
   timeline: { phase: string; months: string; milestones: string[] }[]
+  mockup?: ReactNode
+}
+
+// ─── Phone mockup shell ────────────────────────────────────────────────────────
+
+export function PhoneMockup({ children, label }: { children: ReactNode; label?: string }) {
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <div className="relative" style={{ width: 240, height: 480 }}>
+        {/* Outer frame */}
+        <div
+          className="absolute inset-0 rounded-[36px] overflow-hidden shadow-2xl"
+          style={{ border: '7px solid #2a2a2a', background: '#141414', boxShadow: '0 32px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)' }}
+        >
+          {/* Notch */}
+          <div className="flex justify-center pt-0">
+            <div style={{ width: 80, height: 22, background: '#2a2a2a', borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }} />
+          </div>
+          {/* Status bar */}
+          <div className="flex justify-between items-center px-4 pb-1 text-white" style={{ fontSize: 9, fontWeight: 700, marginTop: -4 }}>
+            <span>9:41</span>
+            <span style={{ letterSpacing: 1 }}>●●● 100%</span>
+          </div>
+          {/* Screen content */}
+          <div style={{ height: 'calc(100% - 44px)', overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none' }}>
+            {children}
+          </div>
+          {/* Home bar */}
+          <div className="absolute bottom-2 left-1/2" style={{ transform: 'translateX(-50%)', width: 80, height: 4, background: '#555', borderRadius: 2 }} />
+        </div>
+        {/* Shine */}
+        <div className="absolute inset-0 rounded-[36px] pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 45%)' }} />
+        {/* Side buttons */}
+        <div className="absolute" style={{ left: -9, top: 80, width: 4, height: 28, background: '#333', borderRadius: 2 }} />
+        <div className="absolute" style={{ left: -9, top: 116, width: 4, height: 44, background: '#333', borderRadius: 2 }} />
+        <div className="absolute" style={{ left: -9, top: 168, width: 4, height: 44, background: '#333', borderRadius: 2 }} />
+        <div className="absolute" style={{ right: -9, top: 120, width: 4, height: 60, background: '#333', borderRadius: 2 }} />
+      </div>
+      {label && (
+        <div className="text-xs text-center max-w-[200px] leading-relaxed" style={{ color: '#666' }}>{label}</div>
+      )}
+    </div>
+  )
+}
+
+// Netflix chrome helpers used inside mockup screens
+export function NetflixTopBar({ title, back }: { title?: string; back?: boolean }) {
+  return (
+    <div className="flex items-center justify-between px-3 py-2" style={{ background: 'rgba(20,20,20,0.95)' }}>
+      <div className="flex items-center gap-2">
+        {back && <span style={{ color: '#fff', fontSize: 12 }}>‹</span>}
+        <span style={{ color: '#e50914', fontWeight: 900, fontSize: 14, letterSpacing: -0.5 }}>N</span>
+        {title && <span style={{ color: '#fff', fontSize: 10, fontWeight: 600 }}>{title}</span>}
+      </div>
+      <div className="flex items-center gap-2">
+        <div style={{ width: 22, height: 22, borderRadius: 4, background: '#e50914', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ color: '#fff', fontSize: 9, fontWeight: 900 }}>KO</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function NetflixBottomNav({ active }: { active?: string }) {
+  const items = [
+    { icon: '⌂', label: 'Home' },
+    { icon: '◎', label: 'Search' },
+    { icon: '▶', label: 'New & Hot' },
+    { icon: '↓', label: 'Downloads' },
+  ]
+  return (
+    <div className="flex justify-around items-center px-2 pt-1 pb-3" style={{ background: 'rgba(20,20,20,0.98)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+      {items.map(item => (
+        <div key={item.label} className="flex flex-col items-center gap-0.5" style={{ opacity: item.label === active ? 1 : 0.4 }}>
+          <span style={{ fontSize: 14, color: item.label === active ? '#e50914' : '#fff' }}>{item.icon}</span>
+          <span style={{ fontSize: 7, color: item.label === active ? '#e50914' : '#fff', fontWeight: 600 }}>{item.label}</span>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 // ─── Reusable section components ──────────────────────────────────────────────
@@ -288,6 +369,21 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
           </div>
         </div>
       </div>
+
+      {/* Product mockup section */}
+      {concept.mockup && (
+        <div style={{ background: `linear-gradient(180deg, ${concept.colorDark}18 0%, #0d0d0d 100%)`, borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="flex items-center gap-2 mb-8">
+              <Monitor size={16} style={{ color: concept.color }} />
+              <h2 className="text-sm font-bold text-white uppercase tracking-wider">Product Preview</h2>
+              <div className="flex-1 h-px bg-gray-800 ml-2" />
+              <span className="text-xs text-gray-600">UI concept screens</span>
+            </div>
+            {concept.mockup}
+          </div>
+        </div>
+      )}
 
       {/* Body */}
       <main className="max-w-6xl mx-auto px-6 py-12">

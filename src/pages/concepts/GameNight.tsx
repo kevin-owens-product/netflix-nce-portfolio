@@ -1,6 +1,88 @@
 import { Gamepad2, Users, Trophy, Zap, Star, Globe, BarChart2, Tv2 } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function GameNightMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      <PhoneMockup label="Live trivia — Stranger Things question with timer">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Game Night" />
+          <div style={{ padding: '6px 12px', background: 'rgba(0,212,170,0.08)', borderBottom: '1px solid rgba(0,212,170,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ color: '#00d4aa', fontSize: 7, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5 }}>Stranger Things Trivia</div>
+              <div style={{ color: '#888', fontSize: 7 }}>Question 4 of 10 · 3 players</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ color: '#fff', fontSize: 11, fontWeight: 900 }}>1,450</div>
+              <div style={{ color: '#888', fontSize: 7 }}>your score</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 6px' }}>
+            <div style={{ width: 52, height: 52, borderRadius: '50%', border: '3px solid #00d4aa', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,212,170,0.08)' }}>
+              <div style={{ color: '#00d4aa', fontSize: 18, fontWeight: 900 }}>8</div>
+            </div>
+          </div>
+          <div style={{ margin: '0 12px 10px', background: 'rgba(255,255,255,0.04)', borderRadius: 10, padding: '10px 12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ color: '#00d4aa', fontSize: 7, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>Season 4 · Hard</div>
+            <div style={{ color: '#fff', fontSize: 10, fontWeight: 700, lineHeight: 1.4 }}>What was Eleven's number during her time at Hawkins Lab?</div>
+          </div>
+          <div style={{ padding: '0 12px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {[{ label: 'A', text: 'Ten' }, { label: 'B', text: 'Eleven', sel: true }, { label: 'C', text: 'Twelve' }, { label: 'D', text: 'Nine' }].map(opt => (
+              <div key={opt.label} style={{ display: 'flex', gap: 8, alignItems: 'center', background: opt.sel ? 'rgba(0,212,170,0.15)' : 'rgba(255,255,255,0.03)', border: `1px solid ${opt.sel ? 'rgba(0,212,170,0.5)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 8, padding: '7px 10px' }}>
+                <div style={{ width: 20, height: 20, borderRadius: '50%', background: opt.sel ? '#00d4aa' : 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 900, color: opt.sel ? '#000' : '#888', flexShrink: 0 }}>{opt.label}</div>
+                <div style={{ color: opt.sel ? '#fff' : '#ccc', fontSize: 9, fontWeight: opt.sel ? 700 : 500 }}>{opt.text}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ margin: '8px 12px 0', background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '6px 10px', display: 'flex', justifyContent: 'space-around' }}>
+            {[{ name: 'You', score: '1,450', color: '#00d4aa' }, { name: 'Sarah', score: '1,600', color: '#3b82f6' }, { name: 'Mike', score: '1,200', color: '#a855f7' }].map(p => (
+              <div key={p.name} style={{ textAlign: 'center' }}>
+                <div style={{ color: p.color, fontSize: 9, fontWeight: 900 }}>{p.score}</div>
+                <div style={{ color: '#555', fontSize: 7 }}>{p.name}</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      <PhoneMockup label="Game lobby — browse shows and invite friends">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Game Night" />
+          <div style={{ margin: '8px 10px', background: 'linear-gradient(135deg, rgba(0,212,170,0.15), rgba(0,212,170,0.05))', border: '1px solid rgba(0,212,170,0.25)', borderRadius: 12, padding: '10px 12px' }}>
+            <div style={{ color: '#00d4aa', fontSize: 7, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>Featured Game</div>
+            <div style={{ color: '#fff', fontSize: 11, fontWeight: 900 }}>Squid Game: Survival Trivia</div>
+            <div style={{ color: '#888', fontSize: 8, marginBottom: 8 }}>S2 streaming · 24K playing today</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <div style={{ background: '#00d4aa', borderRadius: 6, padding: '5px 12px', fontSize: 9, fontWeight: 800, color: '#000' }}>Play Solo</div>
+              <div style={{ background: 'rgba(0,212,170,0.15)', border: '1px solid rgba(0,212,170,0.4)', borderRadius: 6, padding: '5px 12px', fontSize: 9, fontWeight: 700, color: '#00d4aa' }}>Invite Friends</div>
+            </div>
+          </div>
+          <div style={{ padding: '0 10px' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>All Games</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+              {[
+                { show: 'Stranger Things', emoji: '🔦', players: '18K', mode: 'Trivia + Escape' },
+                { show: 'The Witcher', emoji: '⚔️', players: '12K', mode: 'Lore Quiz' },
+                { show: 'Wednesday', emoji: '🖤', players: '9K', mode: 'Mystery Solve' },
+                { show: 'Bridgerton', emoji: '🌹', players: '7K', mode: 'Match Game' },
+              ].map((g, i) => (
+                <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '7px 8px' }}>
+                  <div style={{ fontSize: 16, marginBottom: 3 }}>{g.emoji}</div>
+                  <div style={{ color: '#fff', fontSize: 8, fontWeight: 700, lineHeight: 1.2 }}>{g.show}</div>
+                  <div style={{ color: '#555', fontSize: 7, marginTop: 2 }}>{g.mode}</div>
+                  <div style={{ color: '#00d4aa', fontSize: 7, marginTop: 2 }}>{g.players} playing</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'game-night',
@@ -209,6 +291,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <GameNightMockup /> }
+
 export default function GameNightPage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

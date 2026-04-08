@@ -1,6 +1,96 @@
 import { ShoppingBag, Star, Globe, Package, TrendingUp, Award, Users, Zap } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function FanMarketplaceMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      <PhoneMockup label="Show store — merch shop on the Stranger Things page">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Fan Shop" back />
+          {/* Shop header */}
+          <div style={{ padding: '8px 12px', background: 'linear-gradient(135deg, rgba(168,85,247,0.12), rgba(168,85,247,0.04))', borderBottom: '1px solid rgba(168,85,247,0.15)' }}>
+            <div style={{ color: '#a855f7', fontSize: 7, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5 }}>Official Fan Shop</div>
+            <div style={{ color: '#fff', fontSize: 11, fontWeight: 900 }}>Stranger Things</div>
+            <div style={{ color: '#888', fontSize: 8 }}>47 official items · Ships in 2-4 days</div>
+          </div>
+          {/* Category pills */}
+          <div style={{ display: 'flex', gap: 6, padding: '8px 12px', overflowX: 'auto' }}>
+            {['All', 'Apparel', 'Collectibles', 'Art', 'Experiences'].map((cat, i) => (
+              <div key={cat} style={{ background: i === 0 ? '#a855f7' : 'rgba(255,255,255,0.06)', borderRadius: 20, padding: '4px 10px', fontSize: 8, fontWeight: 700, color: i === 0 ? '#fff' : '#888', whiteSpace: 'nowrap', flexShrink: 0 }}>{cat}</div>
+            ))}
+          </div>
+          {/* Product grid */}
+          <div style={{ padding: '0 10px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, flex: 1 }}>
+            {[
+              { name: 'Hellfire Club Hoodie', price: '$58', badge: '🔥 Trending', emoji: '👕' },
+              { name: 'The Demogorgon Print', price: '$34', badge: null, emoji: '🖼️' },
+              { name: 'Eleven Waffle Mug', price: '$22', badge: '⭐ Best Seller', emoji: '☕' },
+              { name: 'Hawkins Lab Jacket', price: '$120', badge: '✨ Limited', emoji: '🧥' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ aspectRatio: '1', background: 'linear-gradient(135deg, #1a0a2a, #0a0a1a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>{item.emoji}</div>
+                <div style={{ padding: '6px 7px' }}>
+                  {item.badge && <div style={{ background: 'rgba(168,85,247,0.15)', borderRadius: 3, padding: '1px 4px', fontSize: 6, fontWeight: 700, color: '#a855f7', marginBottom: 3, display: 'inline-block' }}>{item.badge}</div>}
+                  <div style={{ color: '#ddd', fontSize: 8, fontWeight: 600, lineHeight: 1.2 }}>{item.name}</div>
+                  <div style={{ color: '#a855f7', fontSize: 10, fontWeight: 900, marginTop: 2 }}>{item.price}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      <PhoneMockup label="Product detail — limited edition item with social proof">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Fan Shop" back />
+          {/* Product image */}
+          <div style={{ background: 'linear-gradient(135deg, #1a0a2a, #0d0d1a)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+            <div style={{ fontSize: 52 }}>👕</div>
+            <div style={{ position: 'absolute', top: 8, right: 8, background: '#a855f7', borderRadius: 4, padding: '2px 6px', fontSize: 7, fontWeight: 900, color: '#fff' }}>LIMITED EDITION</div>
+          </div>
+          {/* Product info */}
+          <div style={{ padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: '#888', fontSize: 7, marginBottom: 2 }}>Official Stranger Things × Netflix</div>
+            <div style={{ color: '#fff', fontSize: 12, fontWeight: 900, marginBottom: 4 }}>Hellfire Club Hoodie</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ color: '#a855f7', fontSize: 16, fontWeight: 900 }}>$58</div>
+              <div style={{ color: '#555', fontSize: 9, textDecoration: 'line-through' }}>$75</div>
+              <div style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 4, padding: '1px 5px', fontSize: 7, fontWeight: 800, color: '#22c55e' }}>Save 23%</div>
+            </div>
+            {/* Social proof */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
+              <div style={{ display: 'flex' }}>
+                {['#e50914', '#3b82f6', '#22c55e'].map((c, i) => (
+                  <div key={i} style={{ width: 14, height: 14, borderRadius: '50%', background: c, border: '1px solid #141414', marginLeft: i > 0 ? -4 : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 6, color: '#fff', fontWeight: 900 }}>
+                    {['K','S','M'][i]}
+                  </div>
+                ))}
+              </div>
+              <div style={{ color: '#888', fontSize: 8 }}>3 of your friends own this</div>
+            </div>
+          </div>
+          {/* Size picker */}
+          <div style={{ padding: '8px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: '#888', fontSize: 8, fontWeight: 700, marginBottom: 6 }}>Size</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {['S', 'M', 'L', 'XL'].map((s, i) => (
+                <div key={s} style={{ width: 28, height: 28, borderRadius: 6, border: `1px solid ${i === 2 ? '#a855f7' : 'rgba(255,255,255,0.15)'}`, background: i === 2 ? 'rgba(168,85,247,0.2)' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 700, color: i === 2 ? '#a855f7' : '#888' }}>{s}</div>
+              ))}
+            </div>
+          </div>
+          {/* CTA */}
+          <div style={{ padding: '10px 12px' }}>
+            <div style={{ background: '#a855f7', borderRadius: 8, padding: '9px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#fff' }}>Add to Cart — $58</div>
+            <div style={{ color: '#555', fontSize: 7, textAlign: 'center', marginTop: 4 }}>Free shipping on orders over $50</div>
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'fan-marketplace',
@@ -209,6 +299,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <FanMarketplaceMockup /> }
+
 export default function FanMarketplacePage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

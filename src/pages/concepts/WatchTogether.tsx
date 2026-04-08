@@ -1,6 +1,114 @@
 import { Video, Users, MessageCircle, Heart, Share2, Tv2, Bell, Mic2 } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function WatchTogetherMockup() {
+  const reactions = ['😂', '😭', '😱', '🔥', '❤️']
+  const participants = [
+    { initials: 'KO', color: '#e50914' },
+    { initials: 'SL', color: '#3b82f6' },
+    { initials: 'MR', color: '#22c55e' },
+  ]
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      {/* Screen 1: Watch room */}
+      <PhoneMockup label="Co-viewing room — synced playback with 3 friends">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Watch Together" back />
+          {/* Video area */}
+          <div style={{ background: '#000', aspectRatio: '16/9', position: 'relative', margin: '0 0 0 0' }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1a0a0a 0%, #0d0d1a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 6 }}>
+              <div style={{ color: '#e50914', fontSize: 28 }}>▶</div>
+              <div style={{ color: '#fff', fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>STRANGER THINGS S4</div>
+              <div style={{ color: '#888', fontSize: 8 }}>Episode 4 · 42:17 remaining</div>
+            </div>
+            {/* Live sync badge */}
+            <div style={{ position: 'absolute', top: 6, left: 6, background: '#e50914', borderRadius: 4, padding: '2px 6px', fontSize: 7, fontWeight: 900, color: '#fff', letterSpacing: 0.5 }}>● SYNCED</div>
+            {/* Participant avatars */}
+            <div style={{ position: 'absolute', top: 6, right: 6, display: 'flex', gap: -4 }}>
+              {participants.map((p, i) => (
+                <div key={i} style={{ width: 20, height: 20, borderRadius: '50%', background: p.color, border: '2px solid #141414', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 7, fontWeight: 900, color: '#fff', marginLeft: i > 0 ? -6 : 0 }}>{p.initials}</div>
+              ))}
+            </div>
+          </div>
+          {/* Reaction row */}
+          <div style={{ display: 'flex', justifyContent: 'space-around', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            {reactions.map(r => (
+              <button key={r} style={{ fontSize: 18, background: 'none', border: 'none', cursor: 'pointer', lineHeight: 1 }}>{r}</button>
+            ))}
+          </div>
+          {/* Chat */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {[
+              { initials: 'SL', color: '#3b82f6', msg: 'no way that just happened 😱', time: '42:02' },
+              { initials: 'MR', color: '#22c55e', msg: 'I CALLED IT from episode 1', time: '42:08' },
+              { initials: 'KO', color: '#e50914', msg: 'rewinding 10 sec hold on', time: '42:15' },
+            ].map((m, i) => (
+              <div key={i} style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', background: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 6, fontWeight: 900, color: '#fff', flexShrink: 0 }}>{m.initials}</div>
+                <div>
+                  <div style={{ color: '#aaa', fontSize: 8 }}>{m.msg}</div>
+                  <div style={{ color: '#444', fontSize: 7 }}>{m.time}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Input */}
+          <div style={{ padding: '6px 10px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 6, alignItems: 'center' }}>
+            <div style={{ flex: 1, background: '#222', borderRadius: 20, padding: '4px 10px', fontSize: 9, color: '#555' }}>React or type...</div>
+            <div style={{ background: '#e50914', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff' }}>↑</div>
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      {/* Screen 2: Invite / Room lobby */}
+      <PhoneMockup label="Room lobby — invite friends before pressing play">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="New Room" back />
+          {/* Show card */}
+          <div style={{ margin: '10px 12px', borderRadius: 10, overflow: 'hidden', position: 'relative', aspectRatio: '16/9', background: 'linear-gradient(135deg, #1a0000, #0a0a1a)' }}>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 4 }}>
+              <div style={{ fontSize: 20 }}>🎬</div>
+              <div style={{ color: '#fff', fontSize: 9, fontWeight: 800 }}>THE BEAR — S3 E1</div>
+            </div>
+          </div>
+          {/* Room info */}
+          <div style={{ padding: '0 12px 8px' }}>
+            <div style={{ color: '#fff', fontSize: 10, fontWeight: 700, marginBottom: 2 }}>Kevin's Room</div>
+            <div style={{ color: '#666', fontSize: 8 }}>Starts when everyone is ready</div>
+          </div>
+          {/* Participants */}
+          <div style={{ padding: '8px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: '#888', fontSize: 8, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.5 }}>In the room</div>
+            {[
+              { initials: 'KO', name: 'You', color: '#e50914', ready: true },
+              { initials: 'SL', name: 'Sarah L.', color: '#3b82f6', ready: true },
+              { initials: 'MR', name: 'Mike R.', color: '#22c55e', ready: false },
+            ].map((p, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                <div style={{ width: 24, height: 24, borderRadius: '50%', background: p.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 900, color: '#fff' }}>{p.initials}</div>
+                <div style={{ flex: 1, color: '#ccc', fontSize: 9, fontWeight: 600 }}>{p.name}</div>
+                <div style={{ fontSize: 8, fontWeight: 700, color: p.ready ? '#22c55e' : '#888' }}>{p.ready ? '✓ Ready' : '...'}</div>
+              </div>
+            ))}
+            {/* Invite slot */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 24, height: 24, borderRadius: '50%', border: '1px dashed #444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: '#555' }}>+</div>
+              <div style={{ color: '#555', fontSize: 9 }}>Invite someone</div>
+            </div>
+          </div>
+          {/* Start button */}
+          <div style={{ padding: '10px 12px' }}>
+            <div style={{ background: '#e50914', borderRadius: 8, padding: '8px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#fff' }}>Start Watching (2/3 ready)</div>
+            <div style={{ textAlign: 'center', color: '#555', fontSize: 8, marginTop: 4 }}>Mike will join when ready</div>
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'watch-together',
@@ -209,6 +317,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <WatchTogetherMockup /> }
+
 export default function WatchTogetherPage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

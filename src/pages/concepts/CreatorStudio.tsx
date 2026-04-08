@@ -1,6 +1,117 @@
 import { Star, Film, Mic2, BookOpen, TrendingUp, Award, Users, DollarSign } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function CreatorStudioMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      {/* Screen 1: Creator discovery shelf */}
+      <PhoneMockup label="Creator content shelf on show detail page">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Stranger Things" back />
+          {/* Show hero */}
+          <div style={{ margin: '0 0 0 0', background: 'linear-gradient(180deg, #1a0a1a 0%, #141414 100%)', padding: '10px 12px 8px' }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+              <div style={{ width: 48, height: 64, borderRadius: 6, background: 'linear-gradient(135deg, #2a0a2a, #0a0a2a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>🎭</div>
+              <div>
+                <div style={{ color: '#fff', fontSize: 12, fontWeight: 900 }}>Stranger Things</div>
+                <div style={{ color: '#888', fontSize: 8, marginTop: 2 }}>Sci-Fi · Horror · 4 Seasons</div>
+                <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>
+                  <div style={{ background: '#e50914', borderRadius: 4, padding: '3px 8px', fontSize: 8, fontWeight: 800, color: '#fff' }}>▶ Play</div>
+                  <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 4, padding: '3px 8px', fontSize: 8, fontWeight: 600, color: '#fff' }}>+ List</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Creator Essays shelf */}
+          <div style={{ padding: '8px 12px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+              <div>
+                <div style={{ color: '#f5c518', fontSize: 8, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.5 }}>★ Creator Studio</div>
+                <div style={{ color: '#fff', fontSize: 10, fontWeight: 700 }}>Fan Essays & Analysis</div>
+              </div>
+              <div style={{ color: '#888', fontSize: 8 }}>See all 47 →</div>
+            </div>
+            {/* Creator cards */}
+            {[
+              { title: 'The Upside Down Explained', creator: 'FilmTheoryHub', views: '1.2M', type: '🎬 Video Essay', badge: 'Top Creator' },
+              { title: 'Every Hidden Clue in S4', creator: 'StrangerDeep', views: '890K', type: '🎙 Commentary', badge: null },
+            ].map((card, i) => (
+              <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 8, background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '7px 8px', alignItems: 'center' }}>
+                <div style={{ width: 42, height: 42, borderRadius: 6, background: 'linear-gradient(135deg, #1a1a2e, #16213e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, flexShrink: 0 }}>🎬</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: '#fff', fontSize: 8, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{card.title}</div>
+                  <div style={{ color: '#888', fontSize: 7, marginTop: 1 }}>{card.creator} · {card.views} views</div>
+                  <div style={{ display: 'flex', gap: 4, marginTop: 3, alignItems: 'center' }}>
+                    <span style={{ color: '#f5c518', fontSize: 7 }}>{card.type}</span>
+                    {card.badge && <span style={{ background: 'rgba(245,197,24,0.15)', border: '1px solid rgba(245,197,24,0.3)', borderRadius: 3, padding: '1px 4px', fontSize: 6, fontWeight: 700, color: '#f5c518' }}>{card.badge}</span>}
+                  </div>
+                </div>
+                <div style={{ color: '#e50914', fontSize: 16, flexShrink: 0 }}>▶</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      {/* Screen 2: Creator dashboard */}
+      <PhoneMockup label="Creator dashboard — earnings, views, subscriber growth">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Creator Studio" />
+          {/* Creator header */}
+          <div style={{ padding: '8px 12px', background: 'rgba(245,197,24,0.06)', borderBottom: '1px solid rgba(245,197,24,0.1)', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #f5c518, #e5a800)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 900, color: '#000' }}>FT</div>
+            <div>
+              <div style={{ color: '#fff', fontSize: 10, fontWeight: 700 }}>FilmTheoryHub</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div style={{ background: 'rgba(245,197,24,0.2)', border: '1px solid rgba(245,197,24,0.4)', borderRadius: 3, padding: '1px 5px', fontSize: 6, fontWeight: 800, color: '#f5c518' }}>★ TOP CREATOR</div>
+                <span style={{ color: '#555', fontSize: 7 }}>84.2K followers</span>
+              </div>
+            </div>
+          </div>
+          {/* Stats */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '10px 12px' }}>
+            {[
+              { label: 'This Month', value: '$2,840', sub: '+18% vs last month', color: '#22c55e' },
+              { label: 'Total Views', value: '4.8M', sub: 'across 12 videos', color: '#f5c518' },
+              { label: 'Avg. Watch Time', value: '87%', sub: 'completion rate', color: '#3b82f6' },
+              { label: 'New Followers', value: '+1,240', sub: 'this month', color: '#a855f7' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '8px 10px' }}>
+                <div style={{ color: '#666', fontSize: 7, textTransform: 'uppercase', letterSpacing: 0.3, marginBottom: 2 }}>{s.label}</div>
+                <div style={{ color: s.color, fontSize: 16, fontWeight: 900 }}>{s.value}</div>
+                <div style={{ color: '#555', fontSize: 7 }}>{s.sub}</div>
+              </div>
+            ))}
+          </div>
+          {/* Upload button */}
+          <div style={{ padding: '0 12px 8px' }}>
+            <div style={{ background: '#f5c518', borderRadius: 8, padding: '8px', textAlign: 'center', fontSize: 10, fontWeight: 800, color: '#000' }}>+ Upload New Essay</div>
+          </div>
+          {/* Recent videos */}
+          <div style={{ padding: '0 12px', flex: 1 }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Recent Videos</div>
+            {[
+              { title: 'The Upside Down Explained', views: '1.2M', earnings: '$840', status: 'live' },
+              { title: 'Every Hidden Clue in S4', views: '890K', earnings: '$612', status: 'live' },
+            ].map((v, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 7, padding: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ width: 32, height: 32, borderRadius: 4, background: 'linear-gradient(135deg, #1a1a2e, #16213e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0 }}>🎬</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: '#ddd', fontSize: 8, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.title}</div>
+                  <div style={{ color: '#555', fontSize: 7 }}>{v.views} views</div>
+                </div>
+                <div style={{ color: '#22c55e', fontSize: 8, fontWeight: 700, flexShrink: 0 }}>{v.earnings}</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'creator-studio',
@@ -209,6 +320,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <CreatorStudioMockup /> }
+
 export default function CreatorStudioPage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }

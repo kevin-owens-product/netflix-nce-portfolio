@@ -1,6 +1,107 @@
 import { Network, Users, TrendingUp, Sparkles, BarChart2, Globe, Zap, Star } from 'lucide-react'
-import ConceptLayout, { type ConceptData } from './ConceptLayout'
+import ConceptLayout, { type ConceptData, PhoneMockup, NetflixTopBar, NetflixBottomNav } from './ConceptLayout'
 import { SIBLINGS } from './siblings'
+
+function TasteNetworkMockup() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center items-start">
+      <PhoneMockup label="Taste profile — genre fingerprint and taste twins">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar title="Taste Network" />
+          {/* Profile header */}
+          <div style={{ padding: '8px 12px', background: 'rgba(99,102,241,0.08)', borderBottom: '1px solid rgba(99,102,241,0.15)', display: 'flex', gap: 10, alignItems: 'center' }}>
+            <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #4338ca)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 900, color: '#fff', flexShrink: 0 }}>KO</div>
+            <div>
+              <div style={{ color: '#fff', fontSize: 10, fontWeight: 700 }}>Kevin Owens</div>
+              <div style={{ color: '#888', fontSize: 8 }}>84 taste twins · 12 followers</div>
+            </div>
+            <div style={{ marginLeft: 'auto', background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', borderRadius: 6, padding: '4px 8px', fontSize: 8, fontWeight: 700, color: '#6366f1' }}>Edit</div>
+          </div>
+          {/* Genre fingerprint */}
+          <div style={{ padding: '8px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Genre Fingerprint</div>
+            {[
+              { genre: 'Thriller', pct: 84, color: '#6366f1' },
+              { genre: 'Drama', pct: 71, color: '#818cf8' },
+              { genre: 'Sci-Fi', pct: 68, color: '#a5b4fc' },
+              { genre: 'Documentary', pct: 55, color: '#c7d2fe' },
+              { genre: 'Comedy', pct: 32, color: '#e0e7ff' },
+            ].map(g => (
+              <div key={g.genre} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+                <div style={{ width: 56, color: '#aaa', fontSize: 8, fontWeight: 600, flexShrink: 0 }}>{g.genre}</div>
+                <div style={{ flex: 1, height: 6, background: '#222', borderRadius: 3, overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${g.pct}%`, background: g.color, borderRadius: 3 }} />
+                </div>
+                <div style={{ width: 24, color: '#888', fontSize: 7, textAlign: 'right', flexShrink: 0 }}>{g.pct}%</div>
+              </div>
+            ))}
+          </div>
+          {/* Taste twins */}
+          <div style={{ padding: '6px 12px', flex: 1 }}>
+            <div style={{ color: '#666', fontSize: 8, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 6 }}>Top Taste Twins</div>
+            {[
+              { initials: 'AL', name: 'Alex L.', match: '94%', location: 'Seoul', color: '#6366f1' },
+              { initials: 'PR', name: 'Priya R.', match: '91%', location: 'London', color: '#a855f7' },
+              { initials: 'JT', name: 'James T.', match: '88%', location: 'Chicago', color: '#3b82f6' },
+            ].map((twin, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '6px 8px' }}>
+                <div style={{ width: 28, height: 28, borderRadius: '50%', background: twin.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 900, color: '#fff', flexShrink: 0 }}>{twin.initials}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ color: '#ddd', fontSize: 9, fontWeight: 600 }}>{twin.name}</div>
+                  <div style={{ color: '#555', fontSize: 7 }}>{twin.location}</div>
+                </div>
+                <div style={{ background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.4)', borderRadius: 6, padding: '2px 7px', fontSize: 9, fontWeight: 900, color: '#6366f1' }}>{twin.match}</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+
+      <PhoneMockup label="Social recommendation layer — taste twin social proof on shelf">
+        <div style={{ background: '#141414', height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <NetflixTopBar />
+          {/* Normal Netflix home shelf */}
+          <div style={{ padding: '8px 12px 4px' }}>
+            <div style={{ color: '#fff', fontSize: 11, fontWeight: 800, marginBottom: 2 }}>Good evening, Kevin</div>
+            <div style={{ color: '#888', fontSize: 8 }}>Continue watching</div>
+          </div>
+          {/* Continue watching row */}
+          <div style={{ display: 'flex', gap: 6, padding: '4px 12px 8px', overflowX: 'auto' }}>
+            {[{ emoji: '🎭', title: 'The Bear' }, { emoji: '🔦', title: 'Stranger Things' }].map((s, i) => (
+              <div key={i} style={{ width: 80, flexShrink: 0, background: 'linear-gradient(135deg, #1a0a0a, #0a0a1a)', borderRadius: 6, aspectRatio: '16/9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, border: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
+                {s.emoji}
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: '#e50914', borderRadius: '0 0 4px 4px', width: `${[60, 30][i]}%` }} />
+              </div>
+            ))}
+          </div>
+          {/* Taste Network shelf — the key feature */}
+          <div style={{ padding: '4px 12px 4px', borderTop: '1px solid rgba(99,102,241,0.15)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 6 }}>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#6366f1' }} />
+              <div style={{ color: '#6366f1', fontSize: 8, fontWeight: 900 }}>Taste Network Picks</div>
+            </div>
+            {[
+              { emoji: '🎬', title: 'Severance', proof: '3 taste twins loved this', badge: true },
+              { emoji: '📺', title: 'The Diplomat', proof: 'Alex rewatched 3× this week', badge: false },
+              { emoji: '🎭', title: 'Succession', proof: '2 taste twins gave 5 stars', badge: true },
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 8, background: 'rgba(255,255,255,0.03)', border: `1px solid ${item.badge ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.07)'}`, borderRadius: 8, padding: '6px 8px' }}>
+                <div style={{ width: 38, height: 38, borderRadius: 6, background: 'linear-gradient(135deg, #1a1a2e, #0d0d1a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{item.emoji}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: '#fff', fontSize: 9, fontWeight: 700 }}>{item.title}</div>
+                  <div style={{ color: '#6366f1', fontSize: 7, marginTop: 1 }}>👥 {item.proof}</div>
+                </div>
+                <div style={{ color: '#e50914', fontSize: 14, flexShrink: 0 }}>▶</div>
+              </div>
+            ))}
+          </div>
+          <NetflixBottomNav active="Home" />
+        </div>
+      </PhoneMockup>
+    </div>
+  )
+}
 
 const concept: ConceptData = {
   id: 'taste-network',
@@ -209,6 +310,8 @@ const concept: ConceptData = {
   ],
 }
 
+const conceptWithMockup: ConceptData = { ...concept, mockup: <TasteNetworkMockup /> }
+
 export default function TasteNetworkPage() {
-  return <ConceptLayout concept={concept} siblings={SIBLINGS} />
+  return <ConceptLayout concept={conceptWithMockup} siblings={SIBLINGS} />
 }
