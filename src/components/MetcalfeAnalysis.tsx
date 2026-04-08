@@ -358,6 +358,132 @@ function OverviewTab({ products, onSelectProduct }: {
         </div>
       </div>
 
+      {/* First 30 Days */}
+      <div className="rounded-2xl border border-gray-800 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a1a0a 0%, #141414 60%)' }}>
+        <div className="px-6 py-5 border-b border-gray-800 flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <div className="text-xs font-black px-2 py-1 rounded-full" style={{ background: 'rgba(34,197,94,0.15)', color: '#22c55e' }}>Operational Plan</div>
+              <span className="text-xs text-gray-600">Not just concepts — a plan</span>
+            </div>
+            <h3 className="text-white font-bold text-xl">My First 30 Days at Netflix</h3>
+            <p className="text-gray-500 text-sm mt-1">If I'm hired tomorrow, here's what I'd actually do in month one.</p>
+          </div>
+          <div className="text-right">
+            <div className="text-xs text-gray-600">Commitment by day 30</div>
+            <div className="text-sm font-bold" style={{ color: '#22c55e' }}>Wave 1 build decision presented to exec</div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-800">
+          {[
+            {
+              week: 'Week 1',
+              theme: 'Listen & Learn',
+              color: '#60a5fa',
+              bullets: [
+                'Meet the full product org — Elizabeth Stone, Eunice Kim, content leadership, member experience leads',
+                'Pull the 18-month data on every social-adjacent feature Netflix has shipped: profiles, friend suggestions, shared lists, Mobile Games',
+                'Interview 20+ subscribers about how they currently co-watch — Teleparty users, Discord watch-party hosts, group-chat coordinators',
+                "Understand the internal politics: who's championed social at Netflix before, who's blocked it, and why",
+              ],
+            },
+            {
+              week: 'Week 2',
+              theme: 'Diagnose',
+              color: '#6366f1',
+              bullets: [
+                'Post-mortem the 2014–2016 Netflix Socialite experiment: what killed it, and what changed since',
+                'Analyze Netflix Mobile Games adoption data — what did it prove about social product demand inside the Netflix app?',
+                'Map the existing tech stack — what Watch Together infra can be built on current CDN/sync systems, what needs new build',
+                "Identify the '10-person team' that could ship Wave 1 — who already exists internally, who I'd need to hire",
+              ],
+            },
+            {
+              week: 'Week 3',
+              theme: 'Prototype & Test',
+              color: '#a855f7',
+              bullets: [
+                "Ship one 0.1% experiment: \"3 friends just finished this\" social proof badge on the homepage shelf. Measure 7-day engagement lift.",
+                'Draft a 1-page Watch Together MVP spec — the smallest possible shippable version that proves co-viewing retention lift',
+                'Circulate the MVP for technical feasibility review with the infra team',
+                "Identify the 'kill criteria' — what data would I need to see in the first 90 days to know the thesis was wrong?",
+              ],
+            },
+            {
+              week: 'Week 4',
+              theme: 'Commit',
+              color: '#22c55e',
+              bullets: [
+                'Present Wave 1 build recommendation to leadership: Watch Together + Taste Network social overlay',
+                'Propose budget, team structure, and 6-month milestone plan — including the first public-facing launch window',
+                "Decision point: ship Wave 1 MVP in Q2 or delay for broader Wave 1 that includes Book Club integration?",
+                "By day 30: the org knows the plan, has signed off on the budget, and the first engineer is writing code",
+              ],
+            },
+          ].map((phase, i) => (
+            <div key={i} className="p-5">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: `${phase.color}20`, color: phase.color }}>{phase.week}</div>
+              </div>
+              <div className="text-white font-bold text-sm mb-3">{phase.theme}</div>
+              <ul className="space-y-2">
+                {phase.bullets.map((b, j) => (
+                  <li key={j} className="flex items-start gap-2 text-xs text-gray-400 leading-relaxed">
+                    <ChevronRight size={11} className="mt-0.5 shrink-0" style={{ color: phase.color }} />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="px-6 py-4 border-t border-gray-800" style={{ background: 'rgba(34,197,94,0.04)' }}>
+          <div className="text-xs text-gray-500">
+            <span className="text-gray-300 font-semibold">The principle: </span>
+            most new PMs spend month one shadowing and writing up observations. I'd spend it running one experiment, writing one spec, and presenting one decision. That's what CPO-level operators do — and it's how I've onboarded at my last four roles.
+          </div>
+        </div>
+      </div>
+
+      {/* Contrarian Take */}
+      <div className="rounded-2xl border overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a1a00 0%, #141414 70%)', borderColor: 'rgba(245,197,24,0.25)' }}>
+        <div className="p-6 md:p-8">
+          <div className="flex items-start gap-4">
+            <div className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(245,197,24,0.15)', border: '1px solid rgba(245,197,24,0.3)' }}>
+              <Zap size={20} style={{ color: '#f5c518' }} />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="text-xs font-black px-2 py-1 rounded-full" style={{ background: 'rgba(245,197,24,0.15)', color: '#f5c518' }}>The Contrarian Take</div>
+                <span className="text-xs text-gray-600">One thing I'd change about this plan that most PMs would never say</span>
+              </div>
+              <blockquote className="text-xl md:text-2xl font-bold text-white leading-snug mb-4" style={{ borderLeft: '3px solid #f5c518', paddingLeft: 16 }}>
+                "Netflix shouldn't chase sports rights for Netflix Live. Pivot Live to IP-owned reality events — Love Is Blind Live, Bake Off Live, Squid Game: The Challenge Live."
+              </blockquote>
+              <div className="space-y-2 text-sm text-gray-400 leading-relaxed">
+                <p>
+                  <span className="text-white font-semibold">The math makes this obvious: </span>
+                  ESPN pays $2.7B per year for Monday Night Football. Netflix's Jake Paul vs. Mike Tyson fight cost ~$40M all-in and reached 108M households in a single evening — that's <span className="text-white font-semibold">1/70th the cost per household</span> of premium sports rights.
+                </p>
+                <p>
+                  <span className="text-white font-semibold">Reality TV events use IP Netflix already owns, existing production infrastructure, and drive the same appointment-viewing behavior as sports</span> — without bidding against Apple, Amazon, and Disney for rights that cost more every year.
+                </p>
+                <p>
+                  Most PMs won't say this because "Netflix needs sports" is the consensus take. The consensus is wrong. The highest-ROI version of Netflix Live is the one that treats Netflix's own IP library as the sport.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-3 pt-4 border-t border-gray-800">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white" style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
+                <div>
+                  <div className="text-white text-sm font-bold">Kevin Owens</div>
+                  <div className="text-gray-600 text-xs">CPO × 4 · I'll defend this in the interview</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Product cards */}
       <div>
         <h2 className="text-white font-bold text-lg mb-4">All Seven Concepts</h2>
@@ -439,6 +565,53 @@ function OverviewTab({ products, onSelectProduct }: {
                   <div className="text-xs text-white font-bold w-10 text-right">{p.maxUsers}M</div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Let's talk — prominent contact CTA */}
+      <div className="rounded-2xl border overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a0000 0%, #0d0d0d 60%, #1a0000 100%)', borderColor: 'rgba(229,9,20,0.3)' }}>
+        <div className="p-6 md:p-10">
+          <div className="flex flex-col md:flex-row md:items-center gap-8">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-red-950/30 border border-red-900/40 rounded-full px-3 py-1 mb-4">
+                <span className="text-xs font-black text-red-400 tracking-wider uppercase">Let's Talk</span>
+              </div>
+              <h3 className="text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
+                If any of this landed,<br />
+                <span className="text-red-500">the next move is a 15-minute call.</span>
+              </h3>
+              <p className="text-gray-400 leading-relaxed max-w-2xl">
+                I built this portfolio because I want to work on Netflix's product. If you're reading this and you think one of these concepts — or the contrarian take — is worth a conversation, I'll make it easy. Pick a time below. I'll have specific thoughts on whichever concept you want to dig into.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-5 text-xs">
+                <div className="px-3 py-1.5 rounded-full border border-gray-700 text-gray-400">
+                  🇬🇧 London-based, open to US relocation
+                </div>
+                <div className="px-3 py-1.5 rounded-full border border-gray-700 text-gray-400">
+                  Available to start immediately
+                </div>
+                <div className="px-3 py-1.5 rounded-full border border-gray-700 text-gray-400">
+                  Director / VP / SVP Product Management
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 shrink-0 min-w-[260px]">
+              <a href="https://calendar.app.google/rU8y8ENVzi6RQaoN6" target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-base transition-all hover:brightness-110"
+                style={{ background: '#e50914', color: '#fff' }}>
+                📅 Book a 15-min call
+                <ChevronRight size={18} />
+              </a>
+              <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-colors"
+                style={{ background: 'rgba(255,255,255,0.05)', color: '#ddd', border: '1px solid rgba(255,255,255,0.12)' }}>
+                Connect on LinkedIn ↗
+              </a>
+              <div className="text-xs text-gray-600 text-center mt-1">
+                Or DM me on LinkedIn — I respond within 24 hours
+              </div>
             </div>
           </div>
         </div>
@@ -1318,15 +1491,20 @@ export default function MetcalfeAnalysis() {
             <span className="text-white font-semibold text-sm">NCE Portfolio</span>
             <span className="hidden md:block text-gray-600 text-xs">— Kevin Owens · CPO × 4</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link to="/concepts/watch-together"
-              className="text-xs text-gray-500 hover:text-red-400 transition-colors font-semibold hidden md:block">
+              className="text-xs text-gray-500 hover:text-red-400 transition-colors font-semibold hidden md:block mr-2">
               7 Concepts →
             </Link>
             <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
-              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
-              style={{ background: 'rgba(229,9,20,0.15)', color: '#e50914', border: '1px solid rgba(229,9,20,0.3)' }}>
-              Connect on LinkedIn ↗
+              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors hidden md:inline-block"
+              style={{ background: 'rgba(255,255,255,0.06)', color: '#aaa', border: '1px solid rgba(255,255,255,0.1)' }}>
+              LinkedIn ↗
+            </a>
+            <a href="https://calendar.app.google/rU8y8ENVzi6RQaoN6" target="_blank" rel="noreferrer"
+              className="text-xs font-bold px-3 py-1.5 rounded-full transition-all hover:brightness-110"
+              style={{ background: '#e50914', color: '#fff', border: '1px solid #e50914' }}>
+              📅 Book a 15-min call ↗
             </a>
           </div>
         </div>
@@ -1370,9 +1548,14 @@ export default function MetcalfeAnalysis() {
               AI-Driven SaaS Product Leader · CPO × 4 · Scaled Products Across Europe & U.S.
             </div>
           </div>
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-4 text-xs flex-wrap">
+            <a href="https://calendar.app.google/rU8y8ENVzi6RQaoN6" target="_blank" rel="noreferrer"
+              className="font-bold transition-colors"
+              style={{ color: '#e50914' }}>
+              📅 Book a 15-min call ↗
+            </a>
             <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
-              className="text-red-400 hover:text-red-300 transition-colors font-semibold">
+              className="text-gray-400 hover:text-red-300 transition-colors font-semibold">
               linkedin.com/in/kevinaowens ↗
             </a>
             <div className="flex items-center gap-1.5 text-gray-600">

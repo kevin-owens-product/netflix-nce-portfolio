@@ -540,16 +540,23 @@ export default function ConceptLayout({ concept, siblings }: { concept: ConceptD
             <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-black text-white shrink-0"
               style={{ background: 'linear-gradient(135deg, #e50914, #b20710)' }}>KO</div>
             <div>
-              <div className="text-white font-bold">Kevin Owens</div>
-              <div className="text-gray-500 text-sm">AI-Driven SaaS Product Leader · CPO × 4 · London</div>
-              <div className="text-gray-600 text-xs mt-0.5">Built audience intelligence products at GWI used by Netflix, Disney+ & Amazon</div>
+              <div className="text-white font-bold">Want to discuss {concept.name}?</div>
+              <div className="text-gray-500 text-sm">Kevin Owens · CPO × 4 · London, open to US relocation</div>
+              <div className="text-gray-600 text-xs mt-0.5">Book a 15-min call and I'll walk you through the build plan</div>
             </div>
           </div>
-          <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
-            className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold transition-colors text-center"
-            style={{ background: 'rgba(229,9,20,0.15)', color: '#e50914', border: '1px solid rgba(229,9,20,0.3)' }}>
-            Connect on LinkedIn ↗
-          </a>
+          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+            <a href="https://calendar.app.google/rU8y8ENVzi6RQaoN6" target="_blank" rel="noreferrer"
+              className="px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:brightness-110 text-center whitespace-nowrap"
+              style={{ background: '#e50914', color: '#fff' }}>
+              📅 Book a 15-min call
+            </a>
+            <a href="https://www.linkedin.com/in/kevinaowens/" target="_blank" rel="noreferrer"
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors text-center whitespace-nowrap"
+              style={{ background: 'rgba(255,255,255,0.05)', color: '#ddd', border: '1px solid rgba(255,255,255,0.12)' }}>
+              LinkedIn ↗
+            </a>
+          </div>
         </div>
 
         {/* Next concept */}
