@@ -251,7 +251,7 @@ function OverviewTab({ products, onSelectProduct }: {
           <span className="text-red-500">Effects Analysis</span>
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Five product concepts that leverage Netflix's 260M subscriber base as a
+          Seven product concepts that leverage Netflix's 260M subscriber base as a
           network asset — where value scales as <strong className="text-white">N²</strong>.
         </p>
       </div>
